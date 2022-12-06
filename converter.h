@@ -1,0 +1,1 @@
+int byte_2_decimal(char *byte);
