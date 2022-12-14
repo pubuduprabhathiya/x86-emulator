@@ -1,6 +1,8 @@
 #include "../byte_reader/reader.h"
 #include "modrm_map.h"
+#include "dis.h"
 #include <stdio.h>
+#include "../aux.h"
 
 const char* r8[8]={"AL", "CL","DL", "BL", "AH","CH" ,"DH","BH"};
 const char* r16[8]={"AX", "CX","DX","BX","SP","BP","SI","DI"};
@@ -36,14 +38,44 @@ char *get_reg(enum reg_type type,int index){
 struct operand  decode_modrm(struct input_data input){
     unsigned char byte = get_next_byte();
     int mod=byte>>6;
-    int rm=(byte & 0X38)>>3;
-    int reg=(byte & 0X07);
+    int reg=(byte & 0X38)>>3;
+    int rm=(byte & 0X07);
     struct operand op;
     if(input.has_first){
         op.first_operand=get_reg(input.first_reg_type,reg);
     }
     if(input.has_second){
-        op.second_operand=get_reg(input.second_reg_type,reg);
+
+        if(mod==0){
+            if(rm==4){
+
+            }
+            else if (rm==5)
+            {
+                op.second_operand=strcatn(2,BUFSIZ,"$",displacement(32)) ;
+            }
+            else{
+                op.second_operand=get_reg(input.second_reg_type,rm);
+            }
+            
+        
+        }
+        else if (mod==1)
+        {   
+            char *sec=get_reg(input.second_reg_type,rm);
+            op.second_operand=strcatn(5,BUFSIZ,"$",displacement(8),"(%",sec,")") ;
+            /* code */
+        }
+        else if (mod==2)
+        {
+            char *sec=get_reg(input.second_reg_type,rm);
+            op.second_operand=strcatn(5,BUFSIZ,"$",displacement(32),"(%",sec,")") ;
+        }
+        else if (mod==3)
+        {
+            /* code */
+        }
+        
     }
     return op;
 }

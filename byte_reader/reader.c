@@ -14,6 +14,14 @@ unsigned char get_next_byte() {
   }
   return NULL;
 }
+char *get_next_byte_char() {
+  if (next_byte < argsc) {
+    char *byte = args[next_byte];
+    next_byte += 1;
+    return byte;
+  }
+  return NULL;
+}
 
 void set_reader(int argc, char **argv[]){
 args = *argv;
