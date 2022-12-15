@@ -1,5 +1,4 @@
 #include "opcode.h"
-#include "../converter.h"
 #include "../modrm_map/modrm_map.h"
 #include <string.h>
 

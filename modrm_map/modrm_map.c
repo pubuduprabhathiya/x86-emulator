@@ -1,6 +1,7 @@
 #include "../byte_reader/reader.h"
 #include "modrm_map.h"
 #include "dis.h"
+#include "sib.h"
 #include <stdio.h>
 #include "../aux.h"
 
@@ -48,7 +49,7 @@ struct operand  decode_modrm(struct input_data input){
 
         if(mod==0){
             if(rm==4){
-
+                op.second_operand=decode_sib();
             }
             else if (rm==5)
             {

@@ -1,0 +1,2 @@
+
+char *decode_sib();
