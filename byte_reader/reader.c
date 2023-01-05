@@ -14,6 +14,13 @@ unsigned char get_next_byte() {
   }
   return NULL;
 }
+unsigned char get_cur_byte() {
+  if (next_byte-1 > 0) {
+    char *byte = args[next_byte-1];
+    return strtol(byte,NULL,16);
+  }
+  return NULL;
+}
 char *get_next_byte_char() {
   if (next_byte < argsc) {
     char *byte = args[next_byte];

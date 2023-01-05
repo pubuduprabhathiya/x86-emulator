@@ -16,6 +16,9 @@ struct input_data{
     int has_first;
     int has_second;
 
+    int is_first_reg;
+    int is_second_reg;
+
     enum reg_type first_reg_type;
     enum reg_type second_reg_type;
 };

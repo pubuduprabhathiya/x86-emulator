@@ -9,8 +9,9 @@ char *displacement(int bits){
     char *op=malloc(num_of_byte*2+2);
     for(int i=0;i<num_of_byte;i++){
         char *byte = get_next_byte_char();
-        op=strcatn(2, num_of_byte*2+2, op,byte) ;
+        op=strcatn(2, num_of_byte*2+2, byte,op) ;
     }
+    snprintf(op,num_of_byte*2+2,"%lX",strtol(op,NULL,16));
     op=strcatn(2, num_of_byte*2+2, "0X",op) ;
     return op;
 }

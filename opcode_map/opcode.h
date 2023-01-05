@@ -7,7 +7,7 @@ struct instruction
     struct operand *operands;
 };
 
-typedef struct instruction (*map)();
+typedef struct instruction (*map)(unsigned char byte);
 
 void decode(unsigned char  byte);
 

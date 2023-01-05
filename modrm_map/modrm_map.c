@@ -35,7 +35,39 @@ char *get_reg(enum reg_type type,int index){
     
 
 }
- 
+ char * get_rm(int mod,int rm, enum reg_type type){
+
+        if(mod==0){
+            if(rm==4){
+                return decode_sib();
+            }
+            else if (rm==5)
+            {
+                return strcatn(2,BUFSIZ,"$",displacement(32)) ;
+            }
+            else{
+                return get_reg(type,rm);
+            }
+            
+        
+        }
+        else if (mod==1)
+        {   
+            char *sec=get_reg(type,rm);
+            return strcatn(5,BUFSIZ,"$",displacement(8),"(%",sec,")") ;
+            /* code */
+        }
+        else if (mod==2)
+        {
+            char *sec=get_reg(type,rm);
+            return strcatn(5,BUFSIZ,"$",displacement(32),"(%",sec,")") ;
+        }
+        else
+        {
+            return get_reg(type,rm);
+        }
+        
+ }
 struct operand  decode_modrm(struct input_data input){
     unsigned char byte = get_next_byte();
     int mod=byte>>6;
@@ -43,40 +75,23 @@ struct operand  decode_modrm(struct input_data input){
     int rm=(byte & 0X07);
     struct operand op;
     if(input.has_first){
-        op.first_operand=get_reg(input.first_reg_type,reg);
+        if(input.is_first_reg){
+            op.first_operand=get_reg(input.first_reg_type,reg);
+        }
+        else{
+           op.first_operand=get_rm(mod,rm,input.first_reg_type);
+        }
     }
+    
     if(input.has_second){
-
-        if(mod==0){
-            if(rm==4){
-                op.second_operand=decode_sib();
-            }
-            else if (rm==5)
-            {
-                op.second_operand=strcatn(2,BUFSIZ,"$",displacement(32)) ;
-            }
-            else{
-                op.second_operand=get_reg(input.second_reg_type,rm);
-            }
-            
-        
+        if(input.is_second_reg){
+            op.second_operand=get_reg(input.second_reg_type,reg);
         }
-        else if (mod==1)
-        {   
-            char *sec=get_reg(input.second_reg_type,rm);
-            op.second_operand=strcatn(5,BUFSIZ,"$",displacement(8),"(%",sec,")") ;
-            /* code */
-        }
-        else if (mod==2)
-        {
-            char *sec=get_reg(input.second_reg_type,rm);
-            op.second_operand=strcatn(5,BUFSIZ,"$",displacement(32),"(%",sec,")") ;
-        }
-        else if (mod==3)
-        {
-            /* code */
+        else{
+            op.second_operand=get_rm(mod,rm,input.second_reg_type);
         }
         
     }
+    
     return op;
 }
