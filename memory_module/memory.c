@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "memory.h"
+#include <string.h>
+
 
 
 struct Memory memobj;
@@ -17,7 +19,7 @@ int main(){
     addresses[2] = &a3;
     addresses[3] = &a4;
 
-    uint64_t *values_to_write[4];
+    struct Data *values_to_write[4];
     struct Data d1,d2,d3,d4;
 
     d1.type=UINT32;
@@ -34,17 +36,19 @@ int main(){
 
     d4.type=UINT16;
     d4.value = malloc(sizeof(uint16_t));
-    *(uint16_t*)d4.value = 0x33;
+    *(uint16_t*)d4.value = 0x4444;
 
     values_to_write[0] = &d1;
     values_to_write[1] = &d2;
     values_to_write[2] = &d3;
     values_to_write[3] = &d4;
 
-    mem->hashtable = (uint32_t**)malloc(sizeof(uint32_t));
-    mem->values = (uint64_t**)malloc(sizeof(uint64_t));
+    mem->hashtable = (uint32_t*)malloc(sizeof(uint32_t));
+    mem->values = (uint64_t*)malloc(sizeof(uint64_t));
+
     memset(mem->hashtable,0,sizeof(uint32_t)*1);
     memset(mem->values,0,sizeof(uint64_t)*1);
+
     mem->hashtablesize=0;
 
     mem->cell_index = cell_index;
