@@ -25,9 +25,15 @@ int main(){
     addresses[1] = (uint32_t*)&a2;
 
     uint64_t *values_to_write[2];
-    uint64_t v1=10,v2=20;
+    uint64_t v1=0x11111111,v2=0x22222222;
     values_to_write[0] = (uint64_t*)&v1;
     values_to_write[1] = (uint64_t*)&v2;
+
+
+    printf("0 : %u\n",sizeof(*values_to_write));
+    printf("size uint8 : %i\n\n",sizeof(uint8_t));
+    // printf("Size of uint64 : %i\n",sizeof(uint64_t));
+    // printf("Size of values_to_write array : %i\n",sizeof(values_to_write[0]));
     
     mem->hashtable = (uint32_t*)malloc(sizeof(uint32_t));
     mem->values = (uint64_t*)malloc(sizeof(uint64_t));
@@ -38,7 +44,7 @@ int main(){
     mem->read = read;
     mem->write = write;
 
-    for(int i=0;i<sizeof(values_to_write)/sizeof(uint64_t);i++){
+    for(int i=0;i<2;i++){
         mem->write(addresses[i],values_to_write[i],mem);
     }
 
