@@ -65,24 +65,23 @@ void read(uint32_t *address, struct Data *data, struct Memory *mem){
     int cell_index = mem->cell_index(address,mem);
 
     if(data->type==UINT8){
-        uint64_t value = *((uint64_t*)data->value) & 0x00000000000000FF;
-        mem->values[cell_index]=value;
+        uint8_t value = mem->values[cell_index] & 0xFF;
+        *(uint8_t*)data->value=value;
     }
     if(data->type==UINT16){
-        uint64_t value = *((uint64_t*)data->value) & 0x000000000000FFFF;
-        mem->values[cell_index]=value;
+        uint16_t value = mem->values[cell_index] & 0xFFFF;
+        *(uint16_t*)data->value=value;
     }
     if(data->type==UINT32){
-        uint64_t value = *((uint64_t*)data->value) & 0x00000000FFFFFFFF;
-        mem->values[cell_index]=value;
+        uint32_t value = mem->values[cell_index] & 0xFFFFFFFF;
+        *(uint32_t*)data->value=value;
     }
     if(data->type==UINT64){
-        uint64_t value = *((uint64_t*)data->value) & 0xFFFFFFFFFFFFFFFF;
-        mem->values[cell_index]=value;
+        uint64_t value = mem->values[cell_index] & 0xFFFFFFFFFFFFFFFF;
+        *(uint64_t*)data->value=value;
     }
     
-    
-    mem->hashtable[cell_index]=*address;
+    // mem->hashtable[cell_index]=*address;
 
 }
 
@@ -113,7 +112,7 @@ void extend_hashtable(struct Memory *mem){
     //printf("extend_hashtable : new_hashtable,new_values : setting memory to 0 succeeded\n");
 
     for(int i;i<hashtablesize;i++){
-        new_hashtable[i] = (uint32_t)malloc(sizeof(uint32_t));
+        // new_hashtable[i] = (uint32_t)malloc(sizeof(uint32_t));
         // memset(new_hashtable[i], 0, sizeof(uint32_t));
         new_hashtable[i] = mem->hashtable[i];
     }
@@ -121,7 +120,7 @@ void extend_hashtable(struct Memory *mem){
     //printf("extend_hashtable : new_hashtable : moving values succeeded\n");
 
     for(int i;i<hashtablesize;i++){
-        new_values[i] = (uint64_t)malloc(sizeof(uint64_t));
+        // new_values[i] = (uint64_t)malloc(sizeof(uint64_t));
         // memset(new_values[i], 0, sizeof(uint64_t));
         new_values[i] = mem->values[i];
     }

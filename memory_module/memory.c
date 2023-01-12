@@ -57,11 +57,49 @@ int main(){
     mem->read = read;
     mem->write = write;
 
+    printf("Writing to memory\n");
+
     for(int i=0;i<4;i++){
         mem->write(addresses[i],values_to_write[i],mem);
     }
 
     mem->dump(mem);
+
+    struct Data *values_to_read[4];
+    struct Data r1,r2,r3,r4;
+
+    r1.type=UINT32;
+    r1.value = malloc(sizeof(uint32_t));
+    // *(uint32_t*)d1.value=0x11111111;
+
+    r2.type=UINT64;
+    r2.value = malloc(sizeof(uint64_t));
+    // *(uint64_t*)d2.value = 0x222222222222222;
+
+    r3.type=UINT8;
+    r3.value = malloc(sizeof(uint8_t));
+    // *(uint8_t*)d3.value = 0x33;
+
+    r4.type=UINT16;
+    r4.value = malloc(sizeof(uint16_t));
+    // *(uint16_t*)d4.value = 0x4444;
+
+    values_to_read[0] = &r1;
+    values_to_read[1] = &r2;
+    values_to_read[2] = &r3;
+    values_to_read[3] = &r4;
+
+    printf("\n");
+    printf("Reading from memory\n");
+
+    for(int i=0;i<4;i++){
+        mem->read(addresses[i],values_to_read[i],mem);
+    }
+
+    for(int i=0;i<4;i++){
+        printf("Memory Address: %x, \t Value: %llx\n",addresses[i][0],values_to_read[i]->value[0]);
+    }
+
     return 0;
 }
 
