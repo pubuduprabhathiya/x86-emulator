@@ -4,7 +4,7 @@
 struct instruction
 {
     char* opcode;
-    struct operand *operands;
+    struct modrm_output *operands;
 };
 
 typedef struct instruction (*map)(unsigned char byte);
