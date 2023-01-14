@@ -36,8 +36,6 @@ Register_16** registers_es = NULL;
 Register_16** registers_fs = NULL;
 Register_16** registers_gs = NULL;
 
-// int reg_index(const char (*reg_list)[8],char* reg_name);
-
 void init_registers(){
     registers_r8 = (Register_8**)malloc(sizeof(Register_8*)*8);
     registers_r16 = (Register_16**)malloc(sizeof(Register_16*)*8);
@@ -54,8 +52,6 @@ void init_registers(){
     registers_es = (Register_16**)malloc(sizeof(Register_16*));
     registers_fs = (Register_16**)malloc(sizeof(Register_16*));
     registers_gs = (Register_16**)malloc(sizeof(Register_16*));
-
-    // printf("malloc for ** success\n");
 
     for(int i = 0;i<8;i++){
         registers_r8[i] = (Register_8*)malloc(sizeof(Register_8));
@@ -98,8 +94,6 @@ void init_registers(){
     for(int i = 0;i<1;i++){
         registers_gs[i] = (Register_16*)malloc(sizeof(Register_16));
     }
-
-    // printf("reg init success\n");
 }
 
 
@@ -110,8 +104,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = r8[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
 
             if(strcmp(str1,str2)==0){
                 return registers_r8[i];
@@ -125,8 +117,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = r16[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_r16[i];
             }
@@ -138,9 +128,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = r32[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
-            // printf("lex diff: %i\n",strcmp(str1,str2));
 
             if(strcmp(str1,str2)==0){
                 return registers_r32[i];
@@ -154,8 +141,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = mm[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_mm[i];
             }
@@ -167,8 +152,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = xmm[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
 
             if(strcmp(str1,str2)==0){
                 return registers_xmm[i];
@@ -183,8 +166,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = eip[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_eip[i];
             }
@@ -196,8 +177,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = eflags[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
 
             if(strcmp(str1,str2)==0){
                 return registers_eflags[i];
@@ -211,8 +190,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = cs[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_cs[i];
             }
@@ -224,8 +201,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = ss[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
 
             if(strcmp(str1,str2)==0){
                 return registers_ss[i];
@@ -239,8 +214,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = ds[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_ds[i];
             }
@@ -252,8 +225,6 @@ void *get_register(enum reg_type type,char* reg_name){
         for(i;i<8;i++){
             char *str1 = es[i];
             char *str2 = reg_name;
-
-            //printf("%s %s\n",str1,str2);
 
             if(strcmp(str1,str2)==0){
                 return registers_es[i];
@@ -267,8 +238,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = fs[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_fs[i];
             }
@@ -281,8 +250,6 @@ void *get_register(enum reg_type type,char* reg_name){
             char *str1 = gs[i];
             char *str2 = reg_name;
 
-            //printf("%s %s\n",str1,str2);
-
             if(strcmp(str1,str2)==0){
                 return registers_gs[i];
             }
@@ -291,48 +258,8 @@ void *get_register(enum reg_type type,char* reg_name){
     }
 }
 
-int reg_index(const char *reg_list,char* reg_name){
-    printf("in reg_index\n");
-    // int len = sizeof(reg_list)/sizeof(reg_list[0]);
-    // printf("%i\n\n",len);
-    for(int i=0;i<8;i++){
-
-        printf("loop %i\n",i);
-
-        char *str1 = reg_list[i];
-        char *str2 = reg_name;
-
-        //printf("%s %s\n",str1,str2);
-
-        printf("%i\n",strcmp(str1,str2));
- 
-    }
-    printf("reg index success\n");
-    return 0;
-}
-
-// int reg_index(const char *reg_list, char* reg_name) {
-//     for (int i = 0; i < 8; i++) {
-//         printf("loop %i\n",i);
-
-//         char *str1 = (char *)(reg_list + i*8);
-//         char *str2 = reg_name;
-
-//         //printf("%s %s\n",str1,str2);
-
-//         if (strcmp(reg_list[i], reg_name) == 0) {
-//             printf("Found target name: %s\n", reg_list + i*8);
-//             return i;
-//         }
-//     }
-//     printf("Target name not found\n");
-//     return -1;
-// }
-
-
 int main(){
 
-    printf("....1....\n");
     init_registers();
     enum reg_type type_of_reg = reg_32;
     char * reg_name = "EAX";
@@ -344,7 +271,7 @@ int main(){
     Register_32 *reg_to_read = (Register_32*)get_register(type_of_reg,reg_name);
     int b = *(reg_to_read->value);
 
-    printf("%x\n",b);
+    printf("read value from EAX : %x\n",b);
 
     return 0;
 }
