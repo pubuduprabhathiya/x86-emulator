@@ -24,7 +24,7 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
       struct displacement_output *dis = displacement(32);
       *effective_addr = dis->address;
       *output_str = strcatn(2, BUFSIZ, "$", dis->print_output);
-            
+
     } else {
 
       Register_32 *reg_to_read = get_register(reg_32, *resistertype);
@@ -64,7 +64,6 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
     *resistertype = get_reg_name(type, rm);
     *output_str = strcatn(2, BUFSIZ, "%", *resistertype);
   }
-
 }
 struct modrm_output decode_modrm(struct input_data input) {
   unsigned char byte = get_next_byte();
@@ -98,5 +97,7 @@ struct modrm_output decode_modrm(struct input_data input) {
              &output.second_string_opeands);
     }
   }
+  output.first_reg_type = input.first_reg_type;
+  output.second_reg_type = input.second_reg_type;
   return output;
 }

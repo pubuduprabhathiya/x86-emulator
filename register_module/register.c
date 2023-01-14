@@ -96,7 +96,30 @@ void init_registers() {
     registers_gs[i] = (Register_16 *)malloc(sizeof(Register_16));
   }
 
+  uint32_t intial_32[8] = {0xbf8db144, 0x88c5cffb, 0x1,      0xae5ff4,
+                           0xbf8db0bc, 0xbf8db118, 0x9a0ca0, 0x0};
+  for (int i = 0; i < 8; i++) {
+    registers_r32[i]->value = &intial_32[i];
+  }
 
+  uint32_t initial_eip[1] = {0x8048354};
+  registers_eip[0]->value = &initial_eip[0];
+  uint32_t initial_eflag[1] = {0x246};
+  registers_eflags[0]->value = &initial_eflag[0];
+
+  uint32_t initial_ss[1] = {0x7b};
+  registers_eflags[0]->value = &initial_ss[0];
+
+  uint16_t initial_cs[1] = {0x73};
+  registers_cs[0]->value = &initial_cs[0];
+  uint16_t initial_ds[1] = {0x7b};
+  registers_ds[0]->value = &initial_ds[0];
+  uint16_t initial_es[1] = {0x7b};
+  registers_es[0]->value = &initial_es[0];
+  uint16_t initial_fs[1] = {0x0};
+  registers_fs[0]->value = &initial_fs[0];
+  uint16_t initial_gs[1] = {0x33};
+  registers_gs[0]->value = &initial_gs[0];
   printf("Register Init success. \n");
 }
 

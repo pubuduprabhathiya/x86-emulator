@@ -8,7 +8,8 @@ char *regs[] = {"EAX", "ECX", "EDX", "EBX", "ESP", "0X0", "ESI", "EDI"};
 
 struct sib_output *decode_sib() {
 
-  struct sib_output *out=(struct sib_output *)malloc(sizeof(struct sib_output));
+  struct sib_output *out =
+      (struct sib_output *)malloc(sizeof(struct sib_output));
 
   unsigned char byte = get_next_byte();
   int ss = byte >> 6;
