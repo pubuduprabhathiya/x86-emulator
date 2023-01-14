@@ -41,6 +41,27 @@ struct instruction add01(unsigned char byte) {
 
   ins.opcode = "add";
   ins.operands = &op;
+
+  if (op.is_first_operand_register) {
+    Register_32 *reg1 =
+        get_register(op.first_reg_type, op.first_operand_register);
+    Register_32 *reg2 =
+        get_register(op.second_reg_type, op.second_operand_register);
+    uint32_t final = (*reg1->value + *reg2->value);
+    reg1->value = &final;
+  } else {
+
+    struct Data data;
+    data.type = UINT32;
+    get_mem()->read(op.first_operand_effective_addr, &data);
+
+    Register_32 *reg2 =
+        get_register(op.second_reg_type, op.second_operand_register);
+    uint32_t arg = (uint32_t)(*data.value + *reg2->value);
+    data.value = &arg;
+    get_mem()->write(op.first_operand_effective_addr, &data);
+  }
+
   return ins;
 }
 struct instruction add02(unsigned char byte) {

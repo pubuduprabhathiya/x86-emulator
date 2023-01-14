@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Memory memobj;
-struct Memory *mem = &memobj;
+static struct Memory *mem;
 
 void write(uint32_t *address, struct Data *data) {
 
@@ -68,7 +67,7 @@ int cell_index(uint32_t *address) {
 
 void extend_hashtable() {
   int hashtablesize = mem->hashtablesize;
-
+  printf("read\n");
   uint32_t *new_hashtable =
       (uint32_t *)malloc(sizeof(uint32_t) * (hashtablesize + 1));
   uint64_t *new_values =
@@ -101,6 +100,7 @@ void dump() {
 }
 
 void memory_init() {
+  mem = (struct Memory *)malloc(sizeof(struct Memory));
   mem->hashtable = (uint32_t *)malloc(sizeof(uint32_t));
   mem->values = (uint64_t *)malloc(sizeof(uint64_t));
 

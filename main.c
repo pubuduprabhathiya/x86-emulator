@@ -1,31 +1,36 @@
 #include "byte_reader/reader.h"
-#include "opcode_map/opcode.h"
-#include <stdio.h>
-#include "register_module/register.h"
 #include "memory_module/memory.h"
+#include "opcode_map/opcode.h"
+#include "register_module/register.h"
+#include "test.h"
+#include <stdio.h> 
 
 int main(int argc, char *argv[]) {
   init_registers();
   memory_init();
 
-   enum reg_type type_of_reg = reg_32;
-    char * reg_name = "EAX";
+  if(argc>1){
+    if(!strncmp("-t",argv[1],2)){
+      run_test();
+      return 0;
 
-  Register_32 *reg_to_read =
-    (Register_32*)get_register(type_of_reg,reg_name); 
-    int b =*(reg_to_read->value);
-
-    printf("read value from EAX : %x\n",b);
-  
+    }
+    else if (!strncmp("-s",argv[1],2))
+    {
+     return 0;
+    }
+    
+  }
+  printf("%i\n",argc);
   set_reader(argc, &argv);
-  unsigned char byte = get_next_byte();
-  decode(byte);
-
-   
-
-     reg_to_read =(Register_32*)get_register(type_of_reg,reg_name); 
-    b =*(reg_to_read->value);
-
-    printf("read value from EAX : %x\n",b);
+  while (is_next())
+  {
+    unsigned char byte = get_next_byte();
+    decode(byte);
+  }
   
+  
+
+ 
+  return 0;
 }

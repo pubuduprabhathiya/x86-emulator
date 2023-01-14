@@ -1,2 +1,2 @@
 
-char *strcatn(unsigned nstr, unsigned max_len, ...) ;
+char *strcatn(unsigned nstr, unsigned max_len, ...);

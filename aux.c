@@ -1,7 +1,7 @@
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include<stdarg.h>
 
 char *strcatn(unsigned nstr, unsigned max_len, ...) {
   unsigned n = 0, max = 64;

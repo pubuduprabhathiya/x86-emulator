@@ -101,6 +101,10 @@ void init_registers() {
   for (int i = 0; i < 8; i++) {
     registers_r32[i]->value = &intial_32[i];
   }
+  uint8_t intial_8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  for (int i = 0; i < 8; i++) {
+    registers_r8[i]->value = &intial_8[i];
+  }
 
   uint32_t initial_eip[1] = {0x8048354};
   registers_eip[0]->value = &initial_eip[0];
