@@ -96,22 +96,6 @@ void init_registers() {
     registers_gs[i] = (Register_16 *)malloc(sizeof(Register_16));
   }
 
-  setRegister("EAX", hexToInt("0xbf8db144"));
-    setRegister("EBX", hexToInt("0x00ae5ff4"));
-    setRegister("ECX", hexToInt("0x88c5cffb"));
-    setRegister("EDX", hexToInt("0x000000x1"));
-    setRegister("ESP", hexToInt("0xbf8db0bc"));
-    setRegister("EBP", hexToInt("0xbf8db118"));
-    setRegister("ESI", hexToInt("0x009a0ca0"));
-    setRegister("EDI", hexToInt("0x00000000"));
-    setRegister("EIP", hexToInt("0x08048354"));
-    setRegister("CS",  hexToInt("0x00000073"));
-    setRegister("SS",  hexToInt("0x0000007b"));
-    setRegister("DS",  hexToInt("0x0000007b"));
-    setRegister("ES",  hexToInt("0x0000007b"));
-    setRegister("FS",  hexToInt("0x00000000"));
-    setRegister("GS",  hexToInt("0x00000033"));
-    setRegister("EFLAGS", hexToInt("0x00000246"));
 
   printf("Register Init success. \n");
 }
