@@ -1,6 +1,6 @@
+#include "sib.h"
 #include "../aux.h"
 #include "../byte_reader/reader.h"
-#include "sib.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,8 +8,7 @@ char *regs[] = {"EAX", "ECX", "EDX", "EBX", "ESP", "0X0", "ESI", "EDI"};
 
 struct sib_output *decode_sib() {
 
-
-  struct sib_output out;
+  struct sib_output *out=(struct sib_output *)malloc(sizeof(struct sib_output));
 
   unsigned char byte = get_next_byte();
   int ss = byte >> 6;
@@ -35,6 +34,6 @@ struct sib_output *decode_sib() {
   } else {
     first = strcatn(5, BUFSIZ, "(%", first, ",%", second, ")");
   }
-  out.output_string=first;
-  return &out;
+  out->output_string = first;
+  return out;
 }

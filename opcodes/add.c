@@ -6,7 +6,7 @@
 
 struct instruction add00(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 1, 0, 1, reg_8, reg_8};
+  struct input_data input = {1, 0, 1, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "add";
   ins.operands = &op;
@@ -14,7 +14,7 @@ struct instruction add00(unsigned char byte) {
 }
 struct instruction add01(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 1, 0, 1, reg_32, reg_32};
+  struct input_data input = {1, 0, 1, reg_32, reg_32};
   struct modrm_output op = decode_modrm(input);
 
   ins.opcode = "add";
@@ -23,7 +23,7 @@ struct instruction add01(unsigned char byte) {
 }
 struct instruction add02(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 1, 1, 0, reg_8, reg_8};
+  struct input_data input = {1, 1, 0, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "add";
   ins.operands = &op;
@@ -31,7 +31,7 @@ struct instruction add02(unsigned char byte) {
 }
 struct instruction add03(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 1, 1, 0, reg_32, reg_32};
+  struct input_data input = {1, 1, 0, reg_32, reg_32};
 
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "add";
@@ -41,8 +41,8 @@ struct instruction add03(unsigned char byte) {
 struct instruction add04(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
- // op.second_operand = displacement(8);
- // op.first_operand = "AL";
+  // op.second_operand = displacement(8);
+  // op.first_operand = "AL";
   ins.opcode = "add";
   ins.operands = &op;
   return ins;
@@ -50,8 +50,8 @@ struct instruction add04(unsigned char byte) {
 struct instruction add05(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
- // op.second_operand = displacement(32);
- // op.first_operand = "EAX";
+  // op.second_operand = displacement(32);
+  // op.first_operand = "EAX";
   ins.opcode = "add";
   ins.operands = &op;
   return ins;
@@ -59,9 +59,9 @@ struct instruction add05(unsigned char byte) {
 
 struct instruction add80(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 0, 0, 0, reg_8, reg_8};
+  struct input_data input = {0, 0, 0, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
- // op.second_operand = displacement(8);
+  // op.second_operand = displacement(8);
   ins.opcode = "add";
   ins.operands = &op;
   return ins;
@@ -69,10 +69,10 @@ struct instruction add80(unsigned char byte) {
 
 struct instruction add81(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 0, 0, 0, reg_32, reg_32};
+  struct input_data input = {0, 0, 0, reg_32, reg_32};
 
   struct modrm_output op = decode_modrm(input);
-//  op.second_operand = displacement(32);
+  //  op.second_operand = displacement(32);
   ins.opcode = "add";
   ins.operands = &op;
   return ins;
@@ -80,10 +80,10 @@ struct instruction add81(unsigned char byte) {
 
 struct instruction add82(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 0, 0, 0, reg_8, reg_8};
+  struct input_data input = {0, 0, 0, reg_8, reg_8};
 
   struct modrm_output op = decode_modrm(input);
- // op.second_operand = displacement(8);
+  // op.second_operand = displacement(8);
   ins.opcode = "add";
   ins.operands = &op;
   return ins;
@@ -91,10 +91,10 @@ struct instruction add82(unsigned char byte) {
 
 struct instruction add83(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = { 0, 0, 0, reg_32, reg_32};
+  struct input_data input = {0, 0, 0, reg_32, reg_32};
 
   struct modrm_output op = decode_modrm(input);
- // op.second_operand = displacement(8);
+  // op.second_operand = displacement(8);
   ins.opcode = "add";
   ins.operands = &op;
   return ins;

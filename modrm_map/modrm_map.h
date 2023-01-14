@@ -1,4 +1,5 @@
 #include <inttypes.h>
+#include "../register_module/register.h"
 struct modrm_output
 {
     int is_first_operand_register;
@@ -14,21 +15,7 @@ struct modrm_output
     char *second_string_opeands;
 };
 
-enum reg_type{
-    reg_8,
-    reg_16,
-    reg_32,
-    reg_mm,
-    reg_xmm,
-    reg_eip,
-    reg_eflags,
-    reg_cs,
-    reg_ss,
-    reg_ds,
-    reg_es,
-    reg_fs,
-    reg_gs
-};
+
 struct input_data{
     int has_second;
 

@@ -25,5 +25,6 @@ void decode(unsigned char byte) {
 }
 
 void print_ins(struct instruction ins) {
-   printf("%s %%%s,%%%s\n",ins.opcode,ins.operands->first_string_opeands,ins.operands->second_string_opeands);
+  printf("%s %s,%s\n", ins.opcode, ins.operands->second_string_opeands,
+         ins.operands->first_string_opeands);
 }
