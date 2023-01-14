@@ -19,7 +19,15 @@ enum reg_type{
     reg_16,
     reg_32,
     reg_mm,
-    reg_xmm
+    reg_xmm,
+    reg_eip,
+    reg_eflags,
+    reg_cs,
+    reg_ss,
+    reg_ds,
+    reg_es,
+    reg_fs,
+    reg_gs
 };
 struct input_data{
     int has_second;
