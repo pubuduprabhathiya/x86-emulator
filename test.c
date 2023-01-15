@@ -71,6 +71,7 @@ struct test str_split(char *a_str, const char a_delim) {
 }
 void execute_test(char *name) {
   printf("start test %s\n\n", name);
+  // name=strcatn(2, BUFSIZ, "../sample/", name);
   FILE *ptr;
   ptr = fopen(strcatn(2, BUFSIZ, "../sample/", name), "r");
 
@@ -80,17 +81,33 @@ void execute_test(char *name) {
   }
   struct test output;
   char str[255];
+  char *temp=malloc(sizeof(char));
   while (fgets(str, 255, ptr) != NULL) {
+    temp=strcpy(temp,str);
     output = str_split(str, ' ');
   }
 
   set_reader(output.argc, &output.argv);
-
+  char *result =strcatn(2,BUFSIZ, temp,"\t\t");
   while (is_next()) {
     unsigned char byte = get_next_byte();
-    decode(byte);
+    char *ins = decode(byte);
+    result = strcatn(2, BUFSIZ, result, ins);
   }
+  printf("\nend test %s\n\n\n", name);
+  write_file(name, result);
+
   fclose(ptr);
   free(output.argv);
-  printf("\nend test %s\n\n\n", name);
+  free(temp);
+}
+
+void write_file(char *name, char *result) {
+  FILE *fp;
+  name = strcatn(3, BUFSIZ, "../output/", name, ".out");
+
+  fp = fopen(name, "w");
+  // fprintf(fp, result);
+  fputs(result, fp);
+  fclose(fp);
 }

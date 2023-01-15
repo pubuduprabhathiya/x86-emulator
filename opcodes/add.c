@@ -7,7 +7,7 @@
 #include "../opcode_map/opcode.h"
 
 struct instruction add00(unsigned char byte) {
-  
+
   struct instruction ins;
   struct input_data input = {1, 0, 1, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
@@ -34,7 +34,6 @@ struct instruction add00(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
   return ins;
 }
 struct instruction add01(unsigned char byte) {

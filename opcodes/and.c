@@ -13,10 +13,8 @@ struct instruction and20(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
-  
-
   Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
+      get_register(op.second_reg_type, op.second_operand_register);
   if (op.is_first_operand_register) {
     Register_32 *reg1 =
         get_register(op.first_reg_type, op.first_operand_register);
@@ -44,7 +42,7 @@ struct instruction and21(unsigned char byte) {
   ins.operands = &op;
 
   Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
+      get_register(op.second_reg_type, op.second_operand_register);
   if (op.is_first_operand_register) {
     Register_32 *reg1 =
         get_register(op.first_reg_type, op.first_operand_register);
@@ -70,11 +68,12 @@ struct instruction and22(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
-  Register_32 *reg2 =get_register(op.first_reg_type, op.first_operand_register);
-      
+  Register_32 *reg2 =
+      get_register(op.first_reg_type, op.first_operand_register);
+
   if (op.is_first_operand_register) {
     Register_32 *reg1 =
-          get_register(op.second_reg_type, op.second_operand_register);
+        get_register(op.second_reg_type, op.second_operand_register);
     *(reg2->value) = (*reg1->value & *reg2->value);
   } else {
     struct Data *data = malloc(sizeof(struct Data));
@@ -98,11 +97,12 @@ struct instruction and23(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
-  Register_32 *reg2 =get_register(op.first_reg_type, op.first_operand_register);
-      
+  Register_32 *reg2 =
+      get_register(op.first_reg_type, op.first_operand_register);
+
   if (op.is_first_operand_register) {
     Register_32 *reg1 =
-          get_register(op.second_reg_type, op.second_operand_register);
+        get_register(op.second_reg_type, op.second_operand_register);
     *(reg2->value) = (*reg1->value & *reg2->value);
   } else {
     struct Data *data = malloc(sizeof(struct Data));
@@ -115,7 +115,6 @@ struct instruction and23(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
 
   return ins;
 }
