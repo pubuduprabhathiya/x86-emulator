@@ -5,4 +5,4 @@ struct sib_output {
   char *output_string;
 };
 
-struct sib_output *decode_sib();
+struct sib_output *decode_sib(int mod);

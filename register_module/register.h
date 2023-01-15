@@ -40,6 +40,7 @@ typedef struct Register_128 {
   uint64_t *value[2];
 } Register_128;
 
-void init_registers();
-char *get_reg_name(enum reg_type type, int index);
 void *get_register(enum reg_type type, char *reg_name);
+void init_registers();
+void dump_registers();
+char *get_reg_name(enum reg_type type, int index);

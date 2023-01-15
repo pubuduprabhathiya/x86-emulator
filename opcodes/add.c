@@ -20,16 +20,18 @@ struct instruction add00(unsigned char byte) {
         get_register(op.second_reg_type, op.second_operand_register);
     *(reg1->value) = (*reg1->value + *reg2->value);
   } else {
-
-    struct Data data;
-    data.type = UINT8;
-    get_mem()->read(op.first_operand_effective_addr, &data);
+    struct Data *data;
+    data->type = UINT8;
+    data->value = malloc(sizeof(uint8_t));
+    get_mem()->read(&op.first_operand_effective_addr, data);
 
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-    uint8_t arg = (uint8_t)(*data.value + *reg2->value);
-    data.value = &arg;
-    get_mem()->write(op.first_operand_effective_addr, &data);
+
+    uint8_t arg = (uint8_t)((uint8_t)data->value + *reg2->value);
+    data->type = UINT8;
+    data->value = &arg;
+    get_mem()->write(&op.first_operand_effective_addr, data);
   }
 
   return ins;

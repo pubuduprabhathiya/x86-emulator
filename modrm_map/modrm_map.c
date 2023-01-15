@@ -9,7 +9,7 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
             int *isregister, uint32_t *effective_addr, char **output_str) {
   struct sib_output *sib_out;
   if (mod != 3 && rm == 4) {
-    sib_out = decode_sib();
+    sib_out = decode_sib(mod);
   }
   *resistertype = get_reg_name(reg_32, rm);
 
@@ -35,10 +35,11 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
     *isregister = 0;
 
     struct displacement_output *dis = displacement(8);
+
     if (rm == 4) {
       *effective_addr = sib_out->effective_addr + dis->address;
       *output_str =
-          strcatn(5, BUFSIZ, "$", dis->print_output, sib_out->output_string);
+          strcatn(3, BUFSIZ, "$", dis->print_output, sib_out->output_string);
     } else {
       Register_32 *reg_to_read = get_register(reg_32, *resistertype);
       *effective_addr = *(reg_to_read->value) + dis->address;
@@ -52,7 +53,7 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
     if (rm == 4) {
       *effective_addr = sib_out->effective_addr + dis->address;
       *output_str =
-          strcatn(5, BUFSIZ, "$", dis->print_output, sib_out->output_string);
+          strcatn(3, BUFSIZ, "$", dis->print_output, sib_out->output_string);
     } else {
       Register_32 *reg_to_read = get_register(reg_32, *resistertype);
       *effective_addr = *(reg_to_read->value) + dis->address;
@@ -77,19 +78,19 @@ struct modrm_output decode_modrm(struct input_data input) {
     output.is_first_operand_register = 1;
     output.first_string_opeands =
         strcatn(2, BUFSIZ, "%", output.first_operand_register);
-    printf("%s \n", output.first_string_opeands);
   } else {
     get_rm(mod, rm, input.first_reg_type, &output.first_operand_register,
            &output.is_first_operand_register,
            &output.first_operand_effective_addr, &output.first_string_opeands);
   }
-
   if (input.has_second) {
     if (input.is_second_reg) {
+
       output.second_operand_register = get_reg_name(input.second_reg_type, reg);
       output.is_second_operand_register = 1;
       output.second_string_opeands =
           strcatn(2, BUFSIZ, "%", output.second_operand_register);
+
     } else {
       get_rm(mod, rm, input.first_reg_type, &output.second_operand_register,
              &output.is_second_operand_register,

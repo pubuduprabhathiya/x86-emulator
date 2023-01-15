@@ -37,6 +37,20 @@ Register_16 **registers_es = NULL;
 Register_16 **registers_fs = NULL;
 Register_16 **registers_gs = NULL;
 
+char *get_reg_name(enum reg_type type, int index) {
+  if (type == reg_8) {
+    return (char *)r8[index];
+  } else if (type == reg_16) {
+    return (char *)r16[index];
+  } else if (type == reg_32) {
+    return (char *)r32[index];
+  } else if (type == reg_mm) {
+    return (char *)mm[index];
+  } else {
+    return (char *)xmm[index];
+  }
+}
+
 void init_registers() {
   registers_r8 = (Register_8 **)malloc(sizeof(Register_8 *) * 8);
   registers_r16 = (Register_16 **)malloc(sizeof(Register_16 *) * 8);
@@ -96,52 +110,74 @@ void init_registers() {
     registers_gs[i] = (Register_16 *)malloc(sizeof(Register_16));
   }
 
+  uint8_t intial_8[8] = {0x44, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+  for (int i = 0; i < 8; i++) {
+    registers_r8[i]->value = (uint8_t *)malloc(sizeof(uint8_t));
+    registers_r8[i]->value[0] = intial_8[i];
+  }
+
+  uint16_t intial_16[8] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+  for (int i = 0; i < 8; i++) {
+    registers_r16[i]->value = (uint16_t *)malloc(sizeof(uint16_t));
+    registers_r16[i]->value[0] = intial_16[i];
+  }
+
   uint32_t intial_32[8] = {0xbf8db144, 0x88c5cffb, 0x1,      0xae5ff4,
                            0xbf8db0bc, 0xbf8db118, 0x9a0ca0, 0x0};
   for (int i = 0; i < 8; i++) {
-    registers_r32[i]->value = &intial_32[i];
+    registers_r32[i]->value = (uint32_t *)malloc(sizeof(uint32_t));
+    registers_r32[i]->value[0] = intial_32[i];
   }
-  uint8_t intial_8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+  uint64_t intial_mm[8] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
   for (int i = 0; i < 8; i++) {
-    registers_r8[i]->value = &intial_8[i];
+    registers_mm[i]->value = (uint64_t *)malloc(sizeof(uint64_t));
+    registers_mm[i]->value[0] = intial_mm[i];
+  }
+
+  uint64_t intial_xmm[8] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+  for (int i = 0; i < 8; i++) {
+    registers_xmm[i]->value[0] = (uint64_t *)malloc(sizeof(uint64_t));
+    registers_xmm[i]->value[1] = (uint64_t *)malloc(sizeof(uint64_t));
+    registers_xmm[i]->value[0] = intial_xmm[i];
+    registers_xmm[i]->value[1] = intial_xmm[i];
   }
 
   uint32_t initial_eip[1] = {0x8048354};
-  registers_eip[0]->value = &initial_eip[0];
-  uint32_t initial_eflag[1] = {0x246};
-  registers_eflags[0]->value = &initial_eflag[0];
+  registers_eip[0]->value = (uint32_t *)malloc(sizeof(uint32_t));
+  registers_eip[0]->value[0] = initial_eip[0];
 
-  uint32_t initial_ss[1] = {0x7b};
-  registers_eflags[0]->value = &initial_ss[0];
+  uint32_t initial_eflag[1] = {0x246};
+  registers_eflags[0]->value = (uint32_t *)malloc(sizeof(uint32_t));
+  registers_eflags[0]->value[0] = initial_eflag[0];
+
+  uint16_t initial_ss[1] = {0x7b};
+  registers_ss[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_ss[0]->value[0] = initial_ss[0];
 
   uint16_t initial_cs[1] = {0x73};
-  registers_cs[0]->value = &initial_cs[0];
-  uint16_t initial_ds[1] = {0x7b};
-  registers_ds[0]->value = &initial_ds[0];
-  uint16_t initial_es[1] = {0x7b};
-  registers_es[0]->value = &initial_es[0];
-  uint16_t initial_fs[1] = {0x0};
-  registers_fs[0]->value = &initial_fs[0];
-  uint16_t initial_gs[1] = {0x33};
-  registers_gs[0]->value = &initial_gs[0];
-  printf("Register Init success. \n");
-}
+  registers_cs[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_cs[0]->value[0] = initial_cs[0];
 
-char *get_reg_name(enum reg_type type, int index) {
-  if (type == reg_8) {
-    return (char *)r8[index];
-  } else if (type == reg_16) {
-    return (char *)r16[index];
-  } else if (type == reg_32) {
-    return (char *)r32[index];
-  } else if (type == reg_mm) {
-    return (char *)mm[index];
-  } else {
-    return (char *)xmm[index];
-  }
+  uint16_t initial_ds[1] = {0x7b};
+  registers_ds[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_ds[0]->value[0] = initial_ds[0];
+
+  uint16_t initial_es[1] = {0x7b};
+  registers_es[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_es[0]->value[0] = initial_es[0];
+
+  uint16_t initial_fs[1] = {0x0};
+  registers_fs[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_fs[0]->value[0] = initial_fs[0];
+
+  uint16_t initial_gs[1] = {0x33};
+  registers_gs[0]->value = (uint16_t *)malloc(sizeof(uint16_t));
+  registers_gs[0]->value[0] = initial_gs[0];
 }
 
 void *get_register(enum reg_type type, char *reg_name) {
+
   if (type == reg_8) {
     int i = 0;
     for (i; i < 8; i++) {
@@ -169,7 +205,6 @@ void *get_register(enum reg_type type, char *reg_name) {
     for (i; i < 8; i++) {
       char *str1 = r32[i];
       char *str2 = reg_name;
-
       if (strcmp(str1, str2) == 0) {
         return registers_r32[i];
       }
@@ -200,7 +235,7 @@ void *get_register(enum reg_type type, char *reg_name) {
 
   if (type == reg_eip) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = eip[i];
       char *str2 = reg_name;
 
@@ -211,7 +246,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_eflags) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = eflags[i];
       char *str2 = reg_name;
 
@@ -222,7 +257,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_cs) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = cs[i];
       char *str2 = reg_name;
 
@@ -233,7 +268,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_ss) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = ss[i];
       char *str2 = reg_name;
 
@@ -244,7 +279,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_ds) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = ds[i];
       char *str2 = reg_name;
 
@@ -255,7 +290,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_es) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = es[i];
       char *str2 = reg_name;
 
@@ -266,7 +301,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_fs) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = fs[i];
       char *str2 = reg_name;
 
@@ -277,7 +312,7 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
   if (type == reg_gs) {
     int i = 0;
-    for (i; i < 8; i++) {
+    for (i; i < 1; i++) {
       char *str1 = gs[i];
       char *str2 = reg_name;
 
@@ -288,12 +323,61 @@ void *get_register(enum reg_type type, char *reg_name) {
   }
 }
 
+void dump_registers() {
+  printf("============================== GENERAL PURPOSE REGISTERS "
+         "==============================\n\n");
+  printf("8-bit registers\n");
+  for (int i = 0; i < 8; i++) {
+    printf("%s : 0x%02x\n", r8[i], registers_r8[i]->value[0]);
+  }
+  printf("\n");
+
+  printf("16-bit registers\n");
+  for (int i = 0; i < 8; i++) {
+    printf("%s : 0x%04x\n", r16[i], registers_r16[i]->value[0]);
+  }
+  printf("\n");
+
+  printf("32-bit registers\n");
+  for (int i = 0; i < 8; i++) {
+    printf("%s : 0x%08x\n", r32[i], registers_r32[i]->value[0]);
+  }
+  printf("\n");
+
+  printf("64-bit registers\n");
+  for (int i = 0; i < 8; i++) {
+    printf("%s : 0x%016x\n", mm[i], registers_mm[i]->value[0]);
+  }
+  printf("\n");
+
+  printf("128-bit registers\n");
+  for (int i = 0; i < 8; i++) {
+    printf("%s : 0x%016x%016x\n", xmm[i], registers_mm[i]->value[0],
+           registers_mm[i]->value[1]);
+  }
+  printf("\n");
+
+  printf("============================== SPECIAL PURPOSE REGISTERS "
+         "==============================\n\n");
+  printf("%s : 0x%08x\n", eip[0], registers_eip[0]->value[0]);
+  printf("%s : 0x%08x\n", eflags[0], registers_eflags[0]->value[0]);
+
+  printf("\n");
+
+  printf("%s : 0x%04x\n", ss[0], registers_ss[0]->value[0]);
+  printf("%s : 0x%04x\n", cs[0], registers_cs[0]->value[0]);
+  printf("%s : 0x%04x\n", ds[0], registers_ds[0]->value[0]);
+  printf("%s : 0x%04x\n", es[0], registers_es[0]->value[0]);
+  printf("%s : 0x%04x\n", fs[0], registers_fs[0]->value[0]);
+  printf("%s : 0x%04x\n", gs[0], registers_gs[0]->value[0]);
+}
+
 // int main(){
 
 //     init_registers();
 //     enum reg_type type_of_reg = reg_32;
 //     char * reg_name = "EAX";
-//     uint32_t a = 0x11111111;
+//     uint32_t a = 0x11145111;
 
 //     Register_32 *reg_to_write =
 //     (Register_32*)get_register(type_of_reg,reg_name); reg_to_write->value =
@@ -304,6 +388,15 @@ void *get_register(enum reg_type type, char *reg_name) {
 //     *(reg_to_read->value);
 
 //     printf("read value from EAX : %x\n",b);
+
+//     enum reg_type reg_cs_type = reg_cs;
+//     char * reg_name_cs = "CS";
+
+//     int c = registers_cs[0]->value[0];
+
+//     printf("read value from CS : %x\n",registers_cs[0]->value[0]);
+
+//     dump_registers();
 
 //     return 0;
 // }

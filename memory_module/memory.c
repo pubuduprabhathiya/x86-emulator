@@ -7,7 +7,6 @@
 static struct Memory *mem;
 
 void write(uint32_t *address, struct Data *data) {
-
   int cell_index = mem->cell_index(address);
 
   if (data->type == UINT8) {
@@ -20,6 +19,7 @@ void write(uint32_t *address, struct Data *data) {
   }
   if (data->type == UINT32) {
     uint64_t value = *((uint64_t *)data->value) & 0x00000000FFFFFFFF;
+
     mem->values[cell_index] = value;
   }
   if (data->type == UINT64) {
@@ -31,9 +31,7 @@ void write(uint32_t *address, struct Data *data) {
 }
 
 void read(uint32_t *address, struct Data *data) {
-
   int cell_index = mem->cell_index(address);
-
   if (data->type == UINT8) {
     uint8_t value = mem->values[cell_index] & 0xFF;
     *(uint8_t *)data->value = value;
@@ -53,9 +51,11 @@ void read(uint32_t *address, struct Data *data) {
 }
 
 int cell_index(uint32_t *address) {
+
   int hashtablesize = mem->hashtablesize;
 
-  for (int i; i < hashtablesize; i++) {
+  for (int i = 0; i < hashtablesize; i++) {
+
     if (mem->hashtable[i] == *address) {
       return i;
     }
@@ -67,7 +67,7 @@ int cell_index(uint32_t *address) {
 
 void extend_hashtable() {
   int hashtablesize = mem->hashtablesize;
-  printf("read\n");
+
   uint32_t *new_hashtable =
       (uint32_t *)malloc(sizeof(uint32_t) * (hashtablesize + 1));
   uint64_t *new_values =
@@ -76,11 +76,11 @@ void extend_hashtable() {
   memset(new_hashtable, 0, (hashtablesize + 1) * sizeof(uint32_t));
   memset(new_values, 0, (hashtablesize + 1) * sizeof(uint64_t));
 
-  for (int i; i < hashtablesize; i++) {
+  for (int i = 0; i < hashtablesize; i++) {
     new_hashtable[i] = mem->hashtable[i];
   }
 
-  for (int i; i < hashtablesize; i++) {
+  for (int i = 0; i < hashtablesize; i++) {
     new_values[i] = mem->values[i];
   }
 
@@ -92,7 +92,7 @@ void extend_hashtable() {
 void dump() {
   int hashtablesize = mem->hashtablesize;
 
-  for (int i; i < hashtablesize; i++) {
+  for (int i = 0; i < hashtablesize; i++) {
     printf("Memory Address: %x, \t Value: %llx\n", mem->hashtable[i],
            mem->values[i]);
   }
