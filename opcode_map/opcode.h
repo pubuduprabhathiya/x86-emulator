@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "../opcodes/add.h"
+#include "../opcodes/and.h"
 
 struct instruction {
   char *opcode;
