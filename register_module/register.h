@@ -25,3 +25,8 @@ typedef struct Register_64{
 typedef struct Register_128{
     uint64_t* value[2];
 } Register_128;
+
+
+void *get_register(enum reg_type type,char* reg_name);
+void init_registers();
+void dump_registers();

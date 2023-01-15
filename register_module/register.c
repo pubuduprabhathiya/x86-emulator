@@ -372,29 +372,29 @@ void dump_registers(){
     printf("%s : 0x%04x\n",gs[0],registers_gs[0]->value[0]);
 }
 
-int main(){
+// int main(){
 
-    init_registers();
-    enum reg_type type_of_reg = reg_32;
-    char * reg_name = "EAX";
-    uint32_t a = 0x11145111;
+//     init_registers();
+//     enum reg_type type_of_reg = reg_32;
+//     char * reg_name = "EAX";
+//     uint32_t a = 0x11145111;
 
-    Register_32 *reg_to_write = (Register_32*)get_register(type_of_reg,reg_name);
-    reg_to_write->value = &a;
+//     Register_32 *reg_to_write = (Register_32*)get_register(type_of_reg,reg_name);
+//     reg_to_write->value = &a;
 
-    Register_32 *reg_to_read = (Register_32*)get_register(type_of_reg,reg_name);
-    int b = *(reg_to_read->value);
+//     Register_32 *reg_to_read = (Register_32*)get_register(type_of_reg,reg_name);
+//     int b = *(reg_to_read->value);
 
-    printf("read value from EAX : %x\n",b);
+//     printf("read value from EAX : %x\n",b);
 
-    enum reg_type reg_cs_type = reg_cs;
-    char * reg_name_cs = "CS";
+//     enum reg_type reg_cs_type = reg_cs;
+//     char * reg_name_cs = "CS";
 
-    int c = registers_cs[0]->value[0];
+//     int c = registers_cs[0]->value[0];
 
-    printf("read value from CS : %x\n",registers_cs[0]->value[0]);
+//     printf("read value from CS : %x\n",registers_cs[0]->value[0]);
 
-    dump_registers();
+//     dump_registers();
 
-    return 0;
-}
+//     return 0;
+// }
