@@ -48,7 +48,6 @@ map *opcode_map(int byte) {
 void decode(unsigned char byte) {
   int first = byte / 16;
   int second = byte % 16;
-  printf("%i ,%i \n", first, second);
   struct instruction ins = opcode_map(first)[second](byte);
   print_ins(ins);
 }
