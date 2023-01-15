@@ -15,7 +15,7 @@ void execute_sequence(char *name) {
   printf("==============================start test %s ==============================\n\n", name);
   // name=strcatn(2, BUFSIZ, "../sample/", name);
   FILE *ptr;
-  ptr = fopen(strcatn(2, BUFSIZ, "../sequence/", name), "r");
+  ptr = fopen(name, "r");
 
   if (NULL == ptr) {
     printf("file can't be opened \n");

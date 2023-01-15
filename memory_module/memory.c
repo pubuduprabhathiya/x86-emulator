@@ -93,7 +93,7 @@ void dump() {
   int hashtablesize = mem->hashtablesize;
 
   for (int i = 0; i < hashtablesize; i++) {
-    printf("Memory Address: %x, \t Value: %llx\n", mem->hashtable[i],
+    printf("Memory Address: %x, \t Value: %lx\n", mem->hashtable[i],
            mem->values[i]);
   }
   printf("Memory dump success\n");
