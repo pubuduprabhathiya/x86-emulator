@@ -16,7 +16,7 @@ struct test {
 void run_test() {
   DIR *d;
   struct dirent *dir;
-  d = opendir("/home/hvpubudu/Documents/ACA/ x86-emulator/sample");
+  d = opendir("../sample");
   if (d) {
     while ((dir = readdir(d)) != NULL) {
       if (dir->d_type == 8) {
@@ -74,7 +74,7 @@ void execute_test(char *name) {
   FILE *ptr;
   ptr =
       fopen(strcatn(2, BUFSIZ,
-                    "/home/hvpubudu/Documents/ACA/ x86-emulator/sample/", name),
+                    "../sample/", name),
             "r");
 
   if (NULL == ptr) {

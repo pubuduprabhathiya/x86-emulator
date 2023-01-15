@@ -36,6 +36,7 @@ struct instruction add00(unsigned char byte) {
 
   return ins;
 }
+
 struct instruction add01(unsigned char byte) {
   struct instruction ins;
   struct input_data input = {1, 0, 1, reg_32, reg_32};
@@ -66,6 +67,7 @@ struct instruction add01(unsigned char byte) {
 
   return ins;
 }
+
 struct instruction add02(unsigned char byte) {
   struct instruction ins;
   struct input_data input = {1, 1, 0, reg_8, reg_8};
@@ -74,6 +76,7 @@ struct instruction add02(unsigned char byte) {
   ins.operands = &op;
   return ins;
 }
+
 struct instruction add03(unsigned char byte) {
   struct instruction ins;
   struct input_data input = {1, 1, 0, reg_32, reg_32};
@@ -83,6 +86,8 @@ struct instruction add03(unsigned char byte) {
   ins.operands = &op;
   return ins;
 }
+
+
 struct instruction add04(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
@@ -95,6 +100,8 @@ struct instruction add04(unsigned char byte) {
   ins.operands = &op;
   return ins;
 }
+
+
 struct instruction add05(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
@@ -107,6 +114,7 @@ struct instruction add05(unsigned char byte) {
   ins.operands = &op;
   return ins;
 }
+
 
 struct instruction add80(unsigned char byte) {
   struct instruction ins;

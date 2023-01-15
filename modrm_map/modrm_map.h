@@ -1,5 +1,7 @@
 #include "../register_module/register.h"
 #include <inttypes.h>
+
+
 struct modrm_output {
   int is_first_operand_register;
   int is_second_operand_register;
@@ -17,9 +19,13 @@ struct modrm_output {
   enum reg_type second_reg_type;
 };
 
+
+// information about instruction
 struct input_data {
+  // has two operands
   int has_second;
 
+  // is this first register
   int is_first_reg;
   int is_second_reg;
 
