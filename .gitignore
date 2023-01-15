@@ -6,3 +6,6 @@
 
 # Build and docs folder/files
 build/*
+
+# Exclude test folders
+.kavindu_test
