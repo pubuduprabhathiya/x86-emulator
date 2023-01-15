@@ -7,7 +7,7 @@
 map opcode_map_0[] = {&add00, &add01, &add02, &add03, &add04, &add05};
 map opcode_map_1[] = {};
 map opcode_map_2[] = {&and20, &and21, &and22, &and23, &and24, &and25};
-map opcode_map_3[] = {};
+map opcode_map_3[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&cmp38,&cmp39,&cmp3a,&cmp3b};
 map opcode_map_4[] = {};
 map opcode_map_5[] = {};
 map opcode_map_6[] = {};

@@ -2,6 +2,7 @@
 
 #include "../opcodes/add.h"
 #include "../opcodes/and.h"
+#include "../opcodes/cmp.h"
 
 struct instruction {
   char *opcode;
