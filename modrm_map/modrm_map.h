@@ -1,27 +1,25 @@
-
-struct operand
+#include <inttypes.h>
+#include "../register_module/register.h"
+struct modrm_output
 {
-    char *first_operand;
-    char *second_operand;
+    int is_first_operand_register;
+    int is_second_operand_register;
+
+    uint32_t first_operand_effective_addr;
+    uint32_t second_operand_effective_addr;
+
+    char *first_operand_register;
+    char *second_operand_register;
+
+    char *first_string_opeands;
+    char *second_string_opeands;
+
+    enum reg_type first_reg_type;
+    enum reg_type second_reg_type; 
 };
 
-enum reg_type{
-    reg_8,
-    reg_16,
-    reg_32,
-    reg_mm,
-    reg_xmm,
-    reg_eip,
-    reg_eflags,
-    reg_cs,
-    reg_ss,
-    reg_ds,
-    reg_es,
-    reg_fs,
-    reg_gs
-};
+
 struct input_data{
-    int has_first;
     int has_second;
 
     int is_first_reg;
@@ -31,4 +29,4 @@ struct input_data{
     enum reg_type second_reg_type;
 };
 
-struct operand decode_modrm(struct input_data input);
+struct modrm_output decode_modrm(struct input_data input);

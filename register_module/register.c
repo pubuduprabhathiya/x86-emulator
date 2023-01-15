@@ -1,8 +1,9 @@
+#include "register.h"
 #include <stdint.h>
 #include <stdio.h>
-#include "register.h"
 #include <string.h>
 // #include "../modrm_map/modrm_map.h"
+
 
 const char* r8[8]={"AL", "CL","DL", "BL", "AH","CH" ,"DH","BH"};
 const char* r16[8]={"AX", "CX","DX","BX","SP","BP","SI","DI"};
@@ -161,34 +162,32 @@ void init_registers(){
     registers_gs[0]->value = (uint16_t*)malloc(sizeof(uint16_t));
     registers_gs[0]->value[0] = initial_gs[0];
 
+
 }
 
+void *get_register(enum reg_type type, char *reg_name) {
+  if (type == reg_8) {
+    int i = 0;
+    for (i; i < 8; i++) {
+      char *str1 = r8[i];
+      char *str2 = reg_name;
 
-void *get_register(enum reg_type type,char* reg_name){
-    if(type==reg_8){
-        int i=0;
-        for(i;i<8;i++){
-            char *str1 = r8[i];
-            char *str2 = reg_name;
-
-            if(strcmp(str1,str2)==0){
-                return registers_r8[i];
-            }
-    
-        }
+      if (strcmp(str1, str2) == 0) {
+        return registers_r8[i];
+      }
     }
-    if(type==reg_16){
-        int i=0;
-        for(i;i<8;i++){
-            char *str1 = r16[i];
-            char *str2 = reg_name;
+  }
+  if (type == reg_16) {
+    int i = 0;
+    for (i; i < 8; i++) {
+      char *str1 = r16[i];
+      char *str2 = reg_name;
 
-            if(strcmp(str1,str2)==0){
-                return registers_r16[i];
-            }
-    
-        }
+      if (strcmp(str1, str2) == 0) {
+        return registers_r16[i];
+      }
     }
+
     if(type==reg_32){
         int i=0;
         for(i;i<8;i++){
@@ -199,31 +198,31 @@ void *get_register(enum reg_type type,char* reg_name){
             }
     
         }
-    }
-    if(type==reg_mm){
-        int i=0;
-        for(i;i<8;i++){
-            char *str1 = mm[i];
-            char *str2 = reg_name;
 
-            if(strcmp(str1,str2)==0){
-                return registers_mm[i];
-            }
-    
-        }
     }
-    if(type==reg_xmm){
-        int i=0;
-        for(i;i<8;i++){
-            char *str1 = xmm[i];
-            char *str2 = reg_name;
+  }
+  if (type == reg_mm) {
+    int i = 0;
+    for (i; i < 8; i++) {
+      char *str1 = mm[i];
+      char *str2 = reg_name;
 
-            if(strcmp(str1,str2)==0){
-                return registers_xmm[i];
-            }
-    
-        }
+      if (strcmp(str1, str2) == 0) {
+        return registers_mm[i];
+      }
     }
+  }
+  if (type == reg_xmm) {
+    int i = 0;
+    for (i; i < 8; i++) {
+      char *str1 = xmm[i];
+      char *str2 = reg_name;
+
+      if (strcmp(str1, str2) == 0) {
+        return registers_xmm[i];
+      }
+    }
+  }
 
     if(type==reg_eip){
         int i=0;

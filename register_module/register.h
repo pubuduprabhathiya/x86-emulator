@@ -3,7 +3,23 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
-#include "../modrm_map/modrm_map.h"
+
+enum reg_type{
+    reg_8,
+    reg_16,
+    reg_32,
+    reg_mm,
+    reg_xmm,
+    reg_eip,
+    reg_eflags,
+    reg_cs,
+    reg_ss,
+    reg_ds,
+    reg_es,
+    reg_fs,
+    reg_gs
+};
+
 
 
 typedef struct Register_8{
@@ -30,3 +46,4 @@ typedef struct Register_128{
 void *get_register(enum reg_type type,char* reg_name);
 void init_registers();
 void dump_registers();
+char *get_reg_name(enum reg_type type, int index) ;
