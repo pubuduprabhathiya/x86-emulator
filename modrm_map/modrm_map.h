@@ -13,7 +13,7 @@ struct modrm_output {
   char *second_operand_register;
 
   char *first_string_opeands;
-  char *second_string_opeands;
+  char *second_string_opeands;git
 
   enum reg_type first_reg_type;
   enum reg_type second_reg_type;
@@ -25,9 +25,12 @@ struct input_data {
   // has two operands
   int has_second;
 
-  // is this first register
+  // is the first one a register 
   int is_first_reg;
+
+  // is the second one a register
   int is_second_reg;
+
 
   enum reg_type first_reg_type;
   enum reg_type second_reg_type;
