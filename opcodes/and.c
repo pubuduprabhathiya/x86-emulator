@@ -43,23 +43,20 @@ struct instruction and21(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
+  Register_32 *reg2 =
+        get_register(op.second_reg_type, op.second_operand_register);
   if (op.is_first_operand_register) {
     Register_32 *reg1 =
         get_register(op.first_reg_type, op.first_operand_register);
-    Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
-    *(reg1->value) = (*reg1->value + *reg2->value);
+    *(reg2->value) = (*reg1->value & *reg2->value);
   } else {
     struct Data *data = malloc(sizeof(struct Data));
     data->type = UINT32;
-    data->value = malloc(sizeof(u_int32_t));
+    data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
-
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
-    data->type = UINT8;
+    uint32_t arg = (uint32_t)((uint32_t)data->value & *reg2->value);
+    data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
@@ -73,24 +70,22 @@ struct instruction and22(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
-  if (op.is_second_operand_register) {
+  Register_32 *reg2 =get_register(op.first_reg_type, op.first_operand_register);
+      
+  if (op.is_first_operand_register) {
     Register_32 *reg1 =
-        get_register(op.first_reg_type, op.first_operand_register);
-    Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
-    *(reg2->value) = (*reg1->value + *reg2->value);
+          get_register(op.second_reg_type, op.second_operand_register);
+    *(reg2->value) = (*reg1->value & *reg2->value);
   } else {
     struct Data *data = malloc(sizeof(struct Data));
-    ;
     data->type = UINT8;
     data->value = malloc(sizeof(uint8_t));
-    get_mem()->read(&op.second_operand_effective_addr, data);
+    get_mem()->read(&op.first_operand_effective_addr, data);
 
-    Register_32 *reg2 =
-        get_register(op.first_reg_type, op.first_operand_register);
-
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
-    *(reg2->value) = arg;
+    uint32_t arg = (uint32_t)((uint32_t)data->value & (uint32_t)*reg2->value);
+    data->type = UINT8;
+    data->value = &arg;
+    get_mem()->write(&op.first_operand_effective_addr, data);
   }
 
   return ins;
@@ -103,25 +98,24 @@ struct instruction and23(unsigned char byte) {
   ins.opcode = "and";
   ins.operands = &op;
 
-  if (op.is_second_operand_register) {
+  Register_32 *reg2 =get_register(op.first_reg_type, op.first_operand_register);
+      
+  if (op.is_first_operand_register) {
     Register_32 *reg1 =
-        get_register(op.first_reg_type, op.first_operand_register);
-    Register_32 *reg2 =
-        get_register(op.second_reg_type, op.second_operand_register);
-    *(reg2->value) = (*reg1->value + *reg2->value);
+          get_register(op.second_reg_type, op.second_operand_register);
+    *(reg2->value) = (*reg1->value & *reg2->value);
   } else {
     struct Data *data = malloc(sizeof(struct Data));
-    ;
     data->type = UINT32;
     data->value = malloc(sizeof(uint32_t));
-    get_mem()->read(&op.second_operand_effective_addr, data);
+    get_mem()->read(&op.first_operand_effective_addr, data);
 
-    Register_32 *reg2 =
-        get_register(op.first_reg_type, op.first_operand_register);
-
-    u_int32_t arg = (u_int32_t)(data->value + *reg2->value);
-    *(reg2->value) = arg;
+    uint32_t arg = (uint32_t)((uint32_t)data->value & (uint32_t)*reg2->value);
+    data->type = UINT32;
+    data->value = &arg;
+    get_mem()->write(&op.first_operand_effective_addr, data);
   }
+
 
   return ins;
 }
@@ -138,7 +132,7 @@ struct instruction and24(unsigned char byte) {
 
   Register_8 *reg1 = get_register(reg_8, op.first_operand_register);
 
-  uint8_t arg = (uint8_t)(reg1->value + (int8_t)dis_out->address);
+  uint8_t arg = (uint8_t)(*reg1->value & (int8_t)dis_out->address);
   *(reg1->value) = arg;
 
   return ins;
@@ -156,7 +150,7 @@ struct instruction and25(unsigned char byte) {
 
   Register_32 *reg1 = get_register(reg_32, op.first_operand_register);
 
-  uint32_t arg = (uint32_t)(reg1->value + dis_out->address);
+  uint32_t arg = (uint32_t)(*reg1->value & dis_out->address);
   *(reg1->value) = arg;
 
   return ins;
