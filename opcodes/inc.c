@@ -127,3 +127,60 @@ struct instruction inc47(unsigned char byte){
     ins.has_two=0;
   return ins;
 }
+
+struct instruction incfe(unsigned char byte){
+   struct instruction ins;
+    struct input_data input = {0, 0, 0, reg_8, reg_8};
+    struct modrm_output op = decode_modrm(input);
+    ins.opcode = "inc";
+    ins.operands = &op;
+
+  if (op.is_first_operand_register) {
+    Register_32 *reg1 =
+        get_register(op.first_reg_type, op.first_operand_register);
+    *(reg1->value) = (*reg1->value + 1);
+  } else {
+    struct Data *data = malloc(sizeof(struct Data));
+    ;
+    data->type = UINT8;
+    data->value = malloc(sizeof(uint8_t));
+    get_mem()->read(&op.second_operand_effective_addr, data);
+
+    u_int8_t arg =
+        (u_int8_t)((u_int8_t)data->value + 1);
+    data->type = UINT8;
+    data->value = &arg;
+    get_mem()->write(&op.first_operand_effective_addr, data);
+  }
+    op.second_string_opeands="";
+    ins.has_two=0;
+  return ins;
+}
+struct instruction incff(unsigned char byte){
+    struct instruction ins;
+    struct input_data input = {0, 0, 0, reg_32, reg_32};
+    struct modrm_output op = decode_modrm(input);
+    ins.opcode = "inc";
+    ins.operands = &op;
+
+  if (op.is_first_operand_register) {
+    Register_32 *reg1 =
+        get_register(op.first_reg_type, op.first_operand_register);
+    *(reg1->value) = (*reg1->value + 1);
+  } else {
+    struct Data *data = malloc(sizeof(struct Data));
+    ;
+    data->type = UINT32;
+    data->value = malloc(sizeof(uint32_t));
+    get_mem()->read(&op.second_operand_effective_addr, data);
+
+    uint32_t arg =
+        (uint32_t)((uint32_t)data->value + 1);
+    data->type = UINT32;
+    data->value = &arg;
+    get_mem()->write(&op.first_operand_effective_addr, data);
+  }
+    op.second_string_opeands="";
+    ins.has_two=0;
+  return ins;
+}

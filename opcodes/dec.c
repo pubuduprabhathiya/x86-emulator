@@ -126,3 +126,6 @@ struct instruction dec4f(unsigned char byte){
     ins.has_two=0;
   return ins;
 }
+
+struct instruction decfe(unsigned char byte){}
+struct instruction decff(unsigned char byte){}

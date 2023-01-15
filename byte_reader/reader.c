@@ -17,8 +17,8 @@ unsigned char get_next_byte() {
   return NULL;
 }
 unsigned char get_cur_byte() {
-  if (next_byte - 1 > 0) {
-    char *byte = args[next_byte - 1];
+  if (next_byte  > 0) {
+    char *byte = args[next_byte ];
     return strtol(byte, NULL, 16);
   }
   return NULL;

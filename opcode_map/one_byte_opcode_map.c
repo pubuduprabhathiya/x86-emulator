@@ -14,6 +14,7 @@ map opcode_map_6[] = {};
 map opcode_map_7[] = {};
 map opcode_map_8[] = {&decode_immediate, &decode_immediate, &decode_immediate,
                       &decode_immediate};
+map opcode_map_F[]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&decode_immediate,&decode_immediate};
 
 map *opcode_map(int byte) {
   if (byte == 0) {
@@ -34,6 +35,9 @@ map *opcode_map(int byte) {
     return opcode_map_7;
   } else if (byte == 8) {
     return opcode_map_8;
+  }
+  else if (byte == 15) {
+    return opcode_map_F;
   }
 
   return NULL;
