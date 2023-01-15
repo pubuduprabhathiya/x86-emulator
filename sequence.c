@@ -9,28 +9,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-void run_test() {
-  DIR *d;
-  struct dirent *dir;
-  d = opendir("../sample");
-  if (d) {
-    while ((dir = readdir(d)) != NULL) {
-      if (dir->d_type == 8) {
 
-        char *temp = malloc(sizeof(char));
-        strcpy(temp, dir->d_name);
-        execute_test(temp);
-      }
-    }
-    closedir(d);
-  }
-}
 
-void execute_test(char *name) {
+void execute_sequence(char *name) {
   printf("==============================start test %s ==============================\n\n", name);
   // name=strcatn(2, BUFSIZ, "../sample/", name);
   FILE *ptr;
-  ptr = fopen(strcatn(2, BUFSIZ, "../sample/", name), "r");
+  ptr = fopen(strcatn(2, BUFSIZ, "../sequence/", name), "r");
 
   if (NULL == ptr) {
     printf("file can't be opened \n");
@@ -49,16 +34,12 @@ void execute_test(char *name) {
   while (is_next()) {
     unsigned char byte = get_next_byte();
     char *ins = decode(byte);
-    if(ins ==NULL){
-      return;
-    }
     result = strcatn(2, BUFSIZ, result, ins);
   }
   printf("\n============================== end test %s ==============================\n\n\n", name);
-  write_file(name, result);
+    write_file(name, result);
 
   fclose(ptr);
   free(output.argv);
   free(temp);
 }
-

@@ -26,7 +26,7 @@ struct instruction cmp38(unsigned char byte) {
     get_mem()->read(&op.first_operand_effective_addr, data);
 
   }
-
+ins.has_two=1;
   return ins;
 }
 
@@ -50,7 +50,7 @@ struct instruction cmp39(unsigned char byte) {
     get_mem()->read(&op.first_operand_effective_addr, data);
 
   }
-
+ins.has_two=1;
   return ins;
 }
 
@@ -74,7 +74,7 @@ struct instruction cmp3a(unsigned char byte) {
     get_mem()->read(&op.first_operand_effective_addr, data);
 
   }
-
+ins.has_two=1;
   return ins;
 }
 struct instruction cmp3b(unsigned char byte) {
@@ -97,6 +97,6 @@ struct instruction cmp3b(unsigned char byte) {
     data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }

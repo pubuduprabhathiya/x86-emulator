@@ -34,6 +34,7 @@ struct instruction add00(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
+  ins.has_two=1;
   return ins;
 }
 struct instruction add01(unsigned char byte) {
@@ -64,7 +65,7 @@ struct instruction add01(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }
 struct instruction add02(unsigned char byte) {
@@ -93,7 +94,7 @@ struct instruction add02(unsigned char byte) {
     u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
     *(reg2->value) = arg;
   }
-
+ins.has_two=1;
   return ins;
 }
 struct instruction add03(unsigned char byte) {
@@ -123,7 +124,7 @@ struct instruction add03(unsigned char byte) {
     u_int32_t arg = (u_int32_t)(data->value + *reg2->value);
     *(reg2->value) = arg;
   }
-
+ins.has_two=1;
   return ins;
 }
 struct instruction add04(unsigned char byte) {
@@ -141,7 +142,7 @@ struct instruction add04(unsigned char byte) {
 
   uint8_t arg = (uint8_t)(reg1->value + (int8_t)dis_out->address);
   *(reg1->value) = arg;
-
+ins.has_two=1;
   return ins;
 }
 struct instruction add05(unsigned char byte) {
@@ -159,7 +160,7 @@ struct instruction add05(unsigned char byte) {
 
   uint32_t arg = (uint32_t)(reg1->value + dis_out->address);
   *(reg1->value) = arg;
-
+ins.has_two=1;
   return ins;
 }
 
@@ -189,7 +190,7 @@ struct instruction add80(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }
 
@@ -219,7 +220,7 @@ struct instruction add81(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }
 
@@ -250,7 +251,7 @@ struct instruction add82(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }
 
@@ -281,6 +282,6 @@ struct instruction add83(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-
+ins.has_two=1;
   return ins;
 }

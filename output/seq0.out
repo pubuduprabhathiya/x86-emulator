@@ -1,0 +1,5 @@
+00 04 05 34 23 43 34 4e ff c4
+
+add %AL, (0X34432334(%EAX))
+dec %ESI
+inc %ESP
