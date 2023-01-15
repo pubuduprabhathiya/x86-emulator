@@ -1,11 +1,11 @@
 #include "sib.h"
 #include "../aux.h"
 #include "../byte_reader/reader.h"
+#include "../register_module/register.h"
+#include "dis.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../register_module/register.h"
-#include "dis.h"
 
 char *regs[] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
 
@@ -34,38 +34,36 @@ struct sib_output *decode_sib(int mod) {
   } else {
     second = regs[index];
     Register_32 *reg_to_read = get_register(reg_32, second);
-    out->effective_addr = *reg_to_read->value*ss;
-    second = strcatn(2, BUFSIZ, "%",  second);
+    out->effective_addr = *reg_to_read->value * ss;
+    second = strcatn(2, BUFSIZ, "%", second);
   }
-  if(base==5){
-    if(mod==0){
-         struct displacement_output *dis = displacement(32);
-          out->effective_addr +=dis->address;
-          out->output_string =strcatn(5,BUFSIZ,"(",dis->print_output,"(",second,"))");
+  if (base == 5) {
+    if (mod == 0) {
+      struct displacement_output *dis = displacement(32);
+      out->effective_addr += dis->address;
+      out->output_string =
+          strcatn(5, BUFSIZ, "(", dis->print_output, "(", second, "))");
+    } else if (mod == 1) {
+      struct displacement_output *dis = displacement(8);
+      out->effective_addr += dis->address;
+      Register_32 *ebp = get_register(reg_32, "EBP");
+      out->effective_addr += *ebp->value;
+      out->output_string =
+          strcatn(5, BUFSIZ, "(", dis->print_output, "(%EBP", second, "))");
+    } else if (mod == 2) {
+      struct displacement_output *dis = displacement(32);
+      out->effective_addr += dis->address;
+      Register_32 *ebp = get_register(reg_32, "EBP");
+      out->effective_addr += *ebp->value;
+      out->output_string =
+          strcatn(5, BUFSIZ, "(", dis->print_output, "(%EBP", second, "))");
     }
-    else if (mod==1)
-    {
-       struct displacement_output *dis = displacement(8);
-          out->effective_addr +=dis->address;
-          Register_32 *ebp = get_register(reg_32, "EBP");
-          out->effective_addr+=*ebp->value;
-          out->output_string =strcatn(5,BUFSIZ,"(",dis->print_output,"(%EBP",second,"))");
-    }
-    else if (mod==2)
-    {
-       struct displacement_output *dis = displacement(32);
-          out->effective_addr +=dis->address;
-          Register_32 *ebp = get_register(reg_32, "EBP");
-          out->effective_addr+=*ebp->value;
-          out->output_string =strcatn(5,BUFSIZ,"(",dis->print_output,"(%EBP",second,"))");
-    }
-    
-    
-  }
-  else{ 
-      Register_32 *b = get_register(reg_32, first);
-      out->effective_addr+=*b->value;
-      out->output_string=strcatn(7,BUFSIZ,"(%",first,",",second,",",val,")");
+
+  } else {
+    Register_32 *b = get_register(reg_32, first);
+    out->effective_addr += *b->value;
+    out->output_string =
+        strcatn(7, BUFSIZ, "(%", first, ",", second, ",", val, ")");
   }
   // if (index != 4) {
   //   Register_32 *reg_to_read = get_register(reg_32, second);

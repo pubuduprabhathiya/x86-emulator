@@ -15,9 +15,6 @@ int main(int argc, char *argv[]) {
       dump_registers();
       get_mem()->dump();
       return 0;
-
-    } else if (!strncmp("-s", argv[1], 2)) {
-      return 0;
     }
   }
   set_reader(argc, &argv);

@@ -16,7 +16,7 @@ struct test {
 void run_test() {
   DIR *d;
   struct dirent *dir;
-  d = opendir("/home/hvpubudu/Documents/ACA/ x86-emulator/sample");
+  d = opendir("../sample");
   if (d) {
     while ((dir = readdir(d)) != NULL) {
       if (dir->d_type == 8) {
@@ -72,10 +72,7 @@ struct test str_split(char *a_str, const char a_delim) {
 void execute_test(char *name) {
   printf("start test %s\n\n", name);
   FILE *ptr;
-  ptr =
-      fopen(strcatn(2, BUFSIZ,
-                    "/home/hvpubudu/Documents/ACA/ x86-emulator/sample/", name),
-            "r");
+  ptr = fopen(strcatn(2, BUFSIZ, "../sample/", name), "r");
 
   if (NULL == ptr) {
     printf("file can't be opened \n");
@@ -90,7 +87,6 @@ void execute_test(char *name) {
   set_reader(output.argc, &output.argv);
 
   while (is_next()) {
-
     unsigned char byte = get_next_byte();
     decode(byte);
   }
