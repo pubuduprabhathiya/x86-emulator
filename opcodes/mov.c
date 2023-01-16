@@ -31,7 +31,7 @@ struct instruction mova0(unsigned char byte) {
 
     u_int8_t arg = (u_int8_t)data->value;
     *(reg1->value) = arg;
-
+ins.has_two=1;
     return ins;
 }
 
@@ -60,7 +60,7 @@ struct instruction mova1(unsigned char byte) {
 
     u_int32_t arg = (u_int32_t)data->value;
     *(reg1->value) = arg;
-
+ins.has_two=1;
     return ins;
 }
 
@@ -91,7 +91,7 @@ struct instruction mova2(unsigned char byte) {
     u_int8_t arg = *(reg1->value);
     data->value = &arg;
     get_mem()->write(&op.second_operand_effective_addr, data);
-
+ins.has_two=1;
     return ins;
 }
 
@@ -122,7 +122,7 @@ struct instruction mova3(unsigned char byte) {
     u_int32_t arg = *(reg1->value);
     data->value = &arg;
     get_mem()->write(&op.second_operand_effective_addr, data);
-
+ins.has_two=1;
     return ins;
 }
 
