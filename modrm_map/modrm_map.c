@@ -5,13 +5,13 @@
 #include "sib.h"
 #include <stdio.h>
 
-void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
+void get_rm(int mod, int rm, enum reg_type type, char **registertype,
             int *isregister, uint32_t *effective_addr, char **output_str) {
   struct sib_output *sib_out;
   if (mod != 3 && rm == 4) {
     sib_out = decode_sib(mod);
   }
-  *resistertype = get_reg_name(reg_32, rm);
+  *registertype = get_reg_name(reg_32, rm);
 
   if (mod == 0) {
     *isregister = 0;
@@ -27,9 +27,9 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
 
     } else {
 
-      Register_32 *reg_to_read = get_register(reg_32, *resistertype);
+      Register_32 *reg_to_read = get_register(reg_32, *registertype);
       *effective_addr = *(reg_to_read->value);
-      *output_str = strcatn(3, BUFSIZ, "(%", *resistertype, ")");
+      *output_str = strcatn(3, BUFSIZ, "(%", *registertype, ")");
     }
   } else if (mod == 1) {
     *isregister = 0;
@@ -41,10 +41,10 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
       *output_str =
           strcatn(3, BUFSIZ, "$", dis->print_output, sib_out->output_string);
     } else {
-      Register_32 *reg_to_read = get_register(reg_32, *resistertype);
+      Register_32 *reg_to_read = get_register(reg_32, *registertype);
       *effective_addr = *(reg_to_read->value) + dis->address;
       *output_str =
-          strcatn(5, BUFSIZ, "$", dis->print_output, "(%", *resistertype, ")");
+          strcatn(5, BUFSIZ, "$", dis->print_output, "(%", *registertype, ")");
     }
   } else if (mod == 2) {
     *isregister = 0;
@@ -55,15 +55,15 @@ void get_rm(int mod, int rm, enum reg_type type, char **resistertype,
       *output_str =
           strcatn(3, BUFSIZ, "$", dis->print_output, sib_out->output_string);
     } else {
-      Register_32 *reg_to_read = get_register(reg_32, *resistertype);
+      Register_32 *reg_to_read = get_register(reg_32, *registertype);
       *effective_addr = *(reg_to_read->value) + dis->address;
       *output_str =
-          strcatn(5, BUFSIZ, "$", dis->print_output, "(%", *resistertype, ")");
+          strcatn(5, BUFSIZ, "$", dis->print_output, "(%", *registertype, ")");
     }
   } else {
     *isregister = 1;
-    *resistertype = get_reg_name(type, rm);
-    *output_str = strcatn(2, BUFSIZ, "%", *resistertype);
+    *registertype = get_reg_name(type, rm);
+    *output_str = strcatn(2, BUFSIZ, "%", *registertype);
   }
 }
 

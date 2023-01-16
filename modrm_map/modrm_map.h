@@ -13,7 +13,7 @@ struct modrm_output {
   char *second_operand_register;
 
   char *first_string_opeands;
-  char *second_string_opeands;git
+  char *second_string_opeands;
 
   enum reg_type first_reg_type;
   enum reg_type second_reg_type;

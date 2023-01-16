@@ -5,6 +5,11 @@
 #include "../opcodes/cmp.h"
 #include "../opcodes/inc.h"
 #include "../opcodes/dec.h"
+#include "../opcodes/mov.h"
+#include "../opcodes/or.h"
+#include "../opcodes/xor.h"
+#include "../opcodes/sub.h"
+#include "../opcodes/sbb.h"
 
 struct instruction {
   char *opcode;

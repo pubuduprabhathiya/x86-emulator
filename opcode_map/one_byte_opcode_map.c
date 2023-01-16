@@ -4,16 +4,18 @@
 #include "opcode.h"
 #include <string.h>
 
-map opcode_map_0[] = {&add00, &add01, &add02, &add03, &add04, &add05};
-map opcode_map_1[] = {};
-map opcode_map_2[] = {&and20, &and21, &and22, &and23, &and24, &and25};
-map opcode_map_3[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&cmp38,&cmp39,&cmp3a,&cmp3b};
-map opcode_map_4[] = {&inc40,&inc41,&inc42,&inc43,&inc44,&inc45,&inc46,&inc47,&dec48,&dec49,&dec4a,&dec4b,&dec4c,&dec4d,&dec4e,&dec4f};
+map opcode_map_0[] = {&add00, &add01, &add02, &add03, &add04, &add05, NULL, NULL, &or08, &or09, &or0a, &or0b, &or0c, &or0d};
+map opcode_map_1[] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &sbb18, &sbb19, &sbb1a, &sbb1b, &sbb1c, &sbb1d};
+map opcode_map_2[] = {&and20, &and21, &and22, &and23, &and24, &and25, NULL, NULL, &sub28, &sub29, &sub2a, &sub2b, &sub2c, &sub2d};
+map opcode_map_3[] = {&xor30, &xor31, &xor32, &xor33, &xor34, &xor35, NULL, NULL, &cmp38, &cmp39, &cmp3a, &cmp3b};
+map opcode_map_4[] = {&inc40, &inc41, &inc42, &inc43, &inc44, &inc45, &inc46, &inc47, &dec48, &dec49, &dec4a, &dec4b, &dec4c, &dec4d, &dec4e, &dec4f};
 map opcode_map_5[] = {};
 map opcode_map_6[] = {};
 map opcode_map_7[] = {};
 map opcode_map_8[] = {&decode_immediate, &decode_immediate, &decode_immediate,
-                      &decode_immediate};
+                      &decode_immediate,NULL,NULL,NULL,NULL,&mov88,&mov89,&mov8a,&mov8b};
+// map opcode_map_A[] = {&mova0,&mova1,&mova2,&mova3};
+map opcode_map_A[] = {&mova0,&mova1,&mova2,&mova3};
 map opcode_map_F[]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&decode_immediate,&decode_immediate};
 
 map *opcode_map(int byte) {
@@ -35,8 +37,9 @@ map *opcode_map(int byte) {
     return opcode_map_7;
   } else if (byte == 8) {
     return opcode_map_8;
-  }
-  else if (byte == 15) {
+  } else if (byte == 10){
+    return opcode_map_A;
+  } else if (byte == 15) {
     return opcode_map_F;
   }
 
