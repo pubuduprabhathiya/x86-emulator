@@ -146,7 +146,7 @@ struct instruction incfe(unsigned char byte) {
     data->value = malloc(sizeof(uint8_t));
     get_mem()->read(&op.second_operand_effective_addr, data);
 
-    u_int8_t arg = (u_int8_t)((u_int8_t)data->value + 1);
+    u_int8_t arg = (u_int8_t)((u_int8_t)*data->value + 1);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -173,7 +173,7 @@ struct instruction incff(unsigned char byte) {
     data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.second_operand_effective_addr, data);
 
-    uint32_t arg = (uint32_t)((uint32_t)data->value + 1);
+    uint32_t arg = (uint32_t)((uint32_t)*data->value + 1);
     data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);

@@ -25,7 +25,7 @@ struct instruction and20(unsigned char byte) {
     data->value = malloc(sizeof(uint8_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    uint8_t arg = (uint8_t)((uint8_t)data->value & *reg2->value);
+    uint8_t arg = (uint8_t)((uint8_t)*data->value & *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -53,7 +53,7 @@ struct instruction and21(unsigned char byte) {
     data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    uint32_t arg = (uint32_t)((uint32_t)data->value & *reg2->value);
+    uint32_t arg = (uint32_t)((uint32_t)*data->value & *reg2->value);
     data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -81,7 +81,7 @@ struct instruction and22(unsigned char byte) {
     data->value = malloc(sizeof(uint8_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    uint32_t arg = (uint32_t)((uint32_t)data->value & (uint32_t)*reg2->value);
+    uint32_t arg = (uint32_t)((uint32_t)*data->value & (uint32_t)*reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -110,7 +110,7 @@ struct instruction and23(unsigned char byte) {
     data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    uint32_t arg = (uint32_t)((uint32_t)data->value & (uint32_t)*reg2->value);
+    uint32_t arg = (uint32_t)((uint32_t)*data->value & (uint32_t)*reg2->value);
     data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);

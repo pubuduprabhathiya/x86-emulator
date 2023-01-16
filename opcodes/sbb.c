@@ -35,9 +35,9 @@ struct instruction sbb18(unsigned char byte) {
 
     uint8_t arg;
     if(((uint8_t)data->value & 0x100)==0x100){
-        arg = (uint8_t)((uint8_t)data->value - *reg2->value - 0x1);
+        arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
     }else{
-        arg = (uint8_t)((uint8_t)data->value - *reg2->value);
+        arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
     }
     data->type = UINT8;
     data->value = &arg;
@@ -76,9 +76,9 @@ struct instruction sbb19(unsigned char byte) {
 
     u_int32_t arg;
     if(((uint8_t)data->value & 0x100000000)==0x100000000){
-        arg = (uint8_t)((uint8_t)data->value - *reg2->value - 0x1);
+        arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
     }else{
-        arg = (uint8_t)((uint8_t)data->value - *reg2->value);
+        arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
     }
     data->type = UINT8;
     data->value = &arg;
@@ -116,9 +116,9 @@ struct instruction sbb1a(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
     u_int32_t arg;
     if((*reg1->value & 0x100)==0x100){
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)data->value - 0x1);
+        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
     }else{
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)data->value);
+        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
     }
     *(reg1->value) = arg;
   }
@@ -157,9 +157,9 @@ struct instruction sbb1b(unsigned char byte) {
 
     u_int32_t arg;
     if((*reg1->value & 0x100000000)==0x100000000){
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)data->value - 0x1);
+        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
     }else{
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)data->value);
+        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
     }
     *(reg1->value) = arg;
   }

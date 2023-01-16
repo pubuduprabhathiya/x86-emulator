@@ -29,7 +29,7 @@ struct instruction mova0(unsigned char byte) {
     data->value = malloc(sizeof(uint8_t));
     get_mem()->read(&op.second_operand_effective_addr, data);
 
-    u_int8_t arg = (u_int8_t)data->value;
+    u_int8_t arg = (u_int8_t)*data->value;
     *(reg1->value) = arg;
 ins.has_two=1;
     return ins;
@@ -58,7 +58,7 @@ struct instruction mova1(unsigned char byte) {
     data->value = malloc(sizeof(uint32_t));
     get_mem()->read(&op.second_operand_effective_addr, data);
 
-    u_int32_t arg = (u_int32_t)data->value;
+    u_int32_t arg = (u_int32_t)*data->value;
     *(reg1->value) = arg;
 ins.has_two=1;
     return ins;
@@ -157,7 +157,7 @@ struct instruction mov88(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
 
-    uint8_t arg = (uint8_t)((uint8_t)data->value + *reg2->value);
+    uint8_t arg = (uint8_t)( *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -189,8 +189,8 @@ struct instruction mov89(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
-    data->type = UINT8;
+    u_int32_t arg = (u_int32_t)(*reg2->value);
+    data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
@@ -221,7 +221,7 @@ struct instruction mov8a(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.first_reg_type, op.first_operand_register);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
+    u_int32_t arg = (u_int32_t)(*data->value );
     *(reg2->value) = arg;
   }
 ins.has_two=1;
@@ -252,7 +252,7 @@ struct instruction mov8b(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.first_reg_type, op.first_operand_register);
 
-    u_int32_t arg = (u_int32_t)(data->value + *reg2->value);
+    u_int32_t arg = (u_int32_t)(*data->value);
     *(reg2->value) = arg;
   }
 ins.has_two=1;

@@ -29,7 +29,7 @@ struct instruction sub28(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
 
-    uint8_t arg = (uint8_t)((uint8_t)data->value - *reg2->value);
+    uint8_t arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -61,7 +61,7 @@ struct instruction sub29(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value - *reg2->value);
+    u_int32_t arg = (u_int32_t)((u_int32_t)*data->value - *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -92,7 +92,7 @@ struct instruction sub2a(unsigned char byte) {
 
     Register_32 *reg1 =
         get_register(op.first_reg_type, op.first_operand_register);
-    u_int32_t arg = (u_int32_t)(*reg1->value - (u_int32_t)data->value);
+    u_int32_t arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
     *(reg1->value) = arg;
   }
 ins.has_two=1;

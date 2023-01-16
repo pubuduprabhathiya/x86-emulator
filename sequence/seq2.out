@@ -1,0 +1,8 @@
+88 05 01 00 00 00 8b 0d 01 00 00 00 88 0d 02 00 00 00 8b 05 02 00 00 00 01 c1 89 0d 03 00 00 00
+
+mov %AL, $0X1
+mov $0X1, %ECX
+mov %CL, $0X2
+mov $0X2, %EAX
+add %EAX, %ECX
+mov %ECX, $0X3
