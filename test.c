@@ -27,7 +27,9 @@ void run_test() {
 }
 
 void execute_test(char *name) {
-  printf("==============================start test %s ==============================\n\n", name);
+  printf("==============================start test %s "
+         "==============================\n\n",
+         name);
   // name=strcatn(2, BUFSIZ, "../sample/", name);
   FILE *ptr;
   ptr = fopen(strcatn(2, BUFSIZ, "../sample/", name), "r");
@@ -38,27 +40,28 @@ void execute_test(char *name) {
   }
   struct test output;
   char str[255];
-  char *temp=malloc(sizeof(char));
+  char *temp = malloc(sizeof(char));
   while (fgets(str, 255, ptr) != NULL) {
-    temp=strcpy(temp,str);
+    temp = strcpy(temp, str);
     output = str_split(str, ' ');
   }
 
   set_reader(output.argc, &output.argv);
-  char *result =strcatn(2,BUFSIZ, temp,"\n\n");
+  char *result = strcatn(2, BUFSIZ, temp, "\n\n");
   while (is_next()) {
     unsigned char byte = get_next_byte();
     char *ins = decode(byte);
-    if(ins ==NULL){
+    if (ins == NULL) {
       return;
     }
     result = strcatn(2, BUFSIZ, result, ins);
   }
-  printf("\n============================== end test %s ==============================\n\n\n", name);
+  printf("\n============================== end test %s "
+         "==============================\n\n\n",
+         name);
   write_file(name, result);
 
   fclose(ptr);
   free(output.argv);
   free(temp);
 }
-

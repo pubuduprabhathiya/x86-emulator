@@ -65,12 +65,6 @@ struct sib_output *decode_sib(int mod) {
     out->output_string =
         strcatn(7, BUFSIZ, "(%", first, ",", second, ",", val, ")");
   }
-  // if (index != 4) {
-  //   Register_32 *reg_to_read = get_register(reg_32, second);
-  //   out->effective_addr = *reg_to_read->value*ss;
-  //   first = strcatn(7, BUFSIZ, "(%", first, ",%", second, ",", val, ")");
-  // } else {
-  //   first = strcatn(7, BUFSIZ, "(%", first, ",", second, ",", val, ")");
-  // }
+  
   return out;
 }
