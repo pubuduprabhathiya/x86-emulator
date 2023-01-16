@@ -16,6 +16,9 @@ map immediate_opcode_map_81[] = {&add81};
 map immediate_opcode_map_82[] = {&add82};
 map immediate_opcode_map_83[] = {&add83};
 
+map immediate_opcode_map_FE[] = {&incfe, &decfe};
+map immediate_opcode_map_FF[] = {&incff, &decff};
+
 map *immediate_opcode_map_group_1[] = {
     immediate_opcode_map_80, immediate_opcode_map_81, immediate_opcode_map_82,
     immediate_opcode_map_83};
@@ -24,6 +27,10 @@ map *immediate_opcode_map(struct group grp) {
 
   if (grp.group == 1) {
     return immediate_opcode_map_group_1[grp.index];
+  } else if (grp.group == 4) {
+    return immediate_opcode_map_FE;
+  } else if (grp.group == 5) {
+    return immediate_opcode_map_FF;
   }
 
   return NULL;
@@ -41,7 +48,13 @@ struct group get_group(unsigned char byte) {
     if (byte == 0X83)
       grp.index = 3;
     return grp;
-  };
+  } else if (byte == 0XFE) {
+
+    grp.group = 4;
+  } else if (byte == 0XFF) {
+    grp.group = 5;
+  }
+
   return grp;
 }
 struct instruction decode_immediate(unsigned char byte) {

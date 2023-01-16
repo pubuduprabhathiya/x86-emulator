@@ -2,6 +2,7 @@
 #include "memory_module/memory.h"
 #include "opcode_map/opcode.h"
 #include "register_module/register.h"
+#include "sequence.h"
 #include "test.h"
 #include <stdio.h>
 
@@ -15,15 +16,24 @@ int main(int argc, char *argv[]) {
       dump_registers();
       get_mem()->dump();
       return 0;
-
     } else if (!strncmp("-s", argv[1], 2)) {
-      return 0;
+      if (argc > 2) {
+        execute_sequence(argv[2]);
+        dump_registers();
+        get_mem()->dump();
+        return 0;
+      } else {
+        printf("Invalid arguments\n");
+      }
     }
   }
   set_reader(argc, &argv);
   while (is_next()) {
     unsigned char byte = get_next_byte();
-    decode(byte);
+    char *result = decode(byte);
+    if (result == NULL) {
+      return 0;
+    }
   }
 
   dump_registers();
