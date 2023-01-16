@@ -87,7 +87,7 @@ void extend_hashtable(uint32_t *address) {
   mem->hashtable = new_hashtable;
   mem->hashtablesize += 1;
   mem->values = new_values;
-  mem->hashtable [mem->hashtablesize-1]=*address;
+  mem->hashtable[mem->hashtablesize - 1] = *address;
 }
 
 void dump() {

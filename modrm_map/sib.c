@@ -65,6 +65,6 @@ struct sib_output *decode_sib(int mod) {
     out->output_string =
         strcatn(7, BUFSIZ, "(%", first, ",", second, ",", val, ")");
   }
-  
+
   return out;
 }

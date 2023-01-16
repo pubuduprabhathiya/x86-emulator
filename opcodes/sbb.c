@@ -19,10 +19,10 @@ struct instruction sbb18(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-    if((*reg2->value & 0x100)==0x100){
-        *(reg2->value) = (*reg2->value - *reg1->value - 0x1);
-    }else{
-        *(reg2->value) = (*reg2->value - *reg1->value);
+    if ((*reg2->value & 0x100) == 0x100) {
+      *(reg2->value) = (*reg2->value - *reg1->value - 0x1);
+    } else {
+      *(reg2->value) = (*reg2->value - *reg1->value);
     }
   } else {
     struct Data *data = malloc(sizeof(struct Data));
@@ -34,16 +34,16 @@ struct instruction sbb18(unsigned char byte) {
         get_register(op.second_reg_type, op.second_operand_register);
 
     uint8_t arg;
-    if(((uint8_t)data->value & 0x100)==0x100){
-        arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
-    }else{
-        arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
+    if (((uint8_t)data->value & 0x100) == 0x100) {
+      arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
+    } else {
+      arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
     }
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-  ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
 
@@ -60,10 +60,10 @@ struct instruction sbb19(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-    if((*reg2->value & 0x100000000)==0x100000000){
-        *(reg2->value) = (*reg2->value - *reg1->value - 0x1);
-    }else{
-        *(reg2->value) = (*reg2->value - *reg1->value);
+    if ((*reg2->value & 0x100000000) == 0x100000000) {
+      *(reg2->value) = (*reg2->value - *reg1->value - 0x1);
+    } else {
+      *(reg2->value) = (*reg2->value - *reg1->value);
     }
   } else {
     struct Data *data = malloc(sizeof(struct Data));
@@ -75,16 +75,16 @@ struct instruction sbb19(unsigned char byte) {
         get_register(op.second_reg_type, op.second_operand_register);
 
     u_int32_t arg;
-    if(((uint8_t)data->value & 0x100000000)==0x100000000){
-        arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
-    }else{
-        arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
+    if (((uint8_t)data->value & 0x100000000) == 0x100000000) {
+      arg = (uint8_t)((uint8_t)*data->value - *reg2->value - 0x1);
+    } else {
+      arg = (uint8_t)((uint8_t)*data->value - *reg2->value);
     }
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
 
@@ -100,10 +100,10 @@ struct instruction sbb1a(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-    if((*reg2->value & 0x100)==0x100){
-        *(reg1->value) = (*reg1->value - *reg2->value - 0x1);
-    }else{
-        *(reg1->value) = (*reg1->value - *reg2->value);
+    if ((*reg2->value & 0x100) == 0x100) {
+      *(reg1->value) = (*reg1->value - *reg2->value - 0x1);
+    } else {
+      *(reg1->value) = (*reg1->value - *reg2->value);
     }
   } else {
     struct Data *data = malloc(sizeof(struct Data));
@@ -115,14 +115,14 @@ struct instruction sbb1a(unsigned char byte) {
     Register_32 *reg1 =
         get_register(op.first_reg_type, op.first_operand_register);
     u_int32_t arg;
-    if((*reg1->value & 0x100)==0x100){
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
-    }else{
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
+    if ((*reg1->value & 0x100) == 0x100) {
+      arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
+    } else {
+      arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
     }
     *(reg1->value) = arg;
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
 
@@ -139,10 +139,10 @@ struct instruction sbb1b(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-    if((*reg2->value & 0x100000000)==0x100000000){
-        *(reg1->value) = (*reg1->value - *reg2->value - 0x1);
-    }else{
-        *(reg1->value) = (*reg1->value - *reg2->value);
+    if ((*reg2->value & 0x100000000) == 0x100000000) {
+      *(reg1->value) = (*reg1->value - *reg2->value - 0x1);
+    } else {
+      *(reg1->value) = (*reg1->value - *reg2->value);
     }
     // *(reg1->value) = (*reg1->value - *reg2->value);
   } else {
@@ -156,17 +156,16 @@ struct instruction sbb1b(unsigned char byte) {
         get_register(op.first_reg_type, op.first_operand_register);
 
     u_int32_t arg;
-    if((*reg1->value & 0x100000000)==0x100000000){
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
-    }else{
-        arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
+    if ((*reg1->value & 0x100000000) == 0x100000000) {
+      arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value - 0x1);
+    } else {
+      arg = (u_int32_t)(*reg1->value - (u_int32_t)*data->value);
     }
     *(reg1->value) = arg;
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction sbb1c(unsigned char byte) {
   struct instruction ins;
@@ -181,18 +180,17 @@ struct instruction sbb1c(unsigned char byte) {
 
   Register_8 *reg1 = get_register(reg_8, op.first_operand_register);
 
-    uint8_t arg;
+  uint8_t arg;
 
-    if((*reg1->value & 0x100)==0x100){
-        arg = (uint8_t)(*reg1->value - *((int8_t*)dis_out->address) - 0x1);
-    }else{
-        arg = (uint8_t)(*reg1->value - *((int8_t*)dis_out->address));
-    }
+  if ((*reg1->value & 0x100) == 0x100) {
+    arg = (uint8_t)(*reg1->value - *((int8_t *)dis_out->address) - 0x1);
+  } else {
+    arg = (uint8_t)(*reg1->value - *((int8_t *)dis_out->address));
+  }
   *(reg1->value) = arg;
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction sbb1d(unsigned char byte) {
   struct instruction ins;
@@ -208,13 +206,13 @@ struct instruction sbb1d(unsigned char byte) {
   Register_32 *reg1 = get_register(reg_32, op.first_operand_register);
 
   uint32_t arg;
-    if((*reg1->value & 0x100)==0x100){
-        arg = (uint32_t)(*reg1->value - dis_out->address - 0x1);
-    }else{
-        arg = (uint32_t)(*reg1->value - dis_out->address);
-    }
-//    (uint32_t)(*reg1->value - *dis_out->address);
+  if ((*reg1->value & 0x100) == 0x100) {
+    arg = (uint32_t)(*reg1->value - dis_out->address - 0x1);
+  } else {
+    arg = (uint32_t)(*reg1->value - dis_out->address);
+  }
+  //    (uint32_t)(*reg1->value - *dis_out->address);
   *(reg1->value) = arg;
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }

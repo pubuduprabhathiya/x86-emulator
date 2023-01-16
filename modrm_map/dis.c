@@ -19,6 +19,6 @@ struct displacement_output *displacement(int bits) {
   out->address = strtol(op, NULL, 16);
   snprintf(op, num_of_byte * 2 + 2, "%lX", strtol(op, NULL, 16));
   out->print_output = strcatn(2, num_of_byte * 2 + 2, "0X", op);
-  
+
   return out;
 }

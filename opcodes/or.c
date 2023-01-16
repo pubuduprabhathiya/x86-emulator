@@ -30,10 +30,9 @@ struct instruction or08(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction or09(unsigned char byte) {
   struct instruction ins;
@@ -60,10 +59,9 @@ struct instruction or09(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction or0a(unsigned char byte) {
   struct instruction ins;
@@ -90,10 +88,9 @@ struct instruction or0a(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction or0b(unsigned char byte) {
   struct instruction ins;
@@ -121,10 +118,9 @@ struct instruction or0b(unsigned char byte) {
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
   }
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction or0c(unsigned char byte) {
   struct instruction ins;
@@ -141,10 +137,9 @@ struct instruction or0c(unsigned char byte) {
 
   uint8_t arg = (uint8_t)(*reg1->value | (int8_t)dis_out->address);
   *(reg1->value) = arg;
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction or0d(unsigned char byte) {
   struct instruction ins;
@@ -161,6 +156,6 @@ struct instruction or0d(unsigned char byte) {
 
   uint32_t arg = (uint32_t)(*reg1->value | dis_out->address);
   *(reg1->value) = arg;
-ins.has_two=1;
+  ins.has_two = 1;
   return ins;
 }

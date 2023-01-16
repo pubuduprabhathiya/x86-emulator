@@ -4,12 +4,12 @@
 #include "../opcodes/and.h"
 #include "../opcodes/cmp.h"
 #include "../opcodes/dec.h"
+#include "../opcodes/inc.h"
 #include "../opcodes/mov.h"
 #include "../opcodes/or.h"
-#include "../opcodes/xor.h"
-#include "../opcodes/sub.h"
 #include "../opcodes/sbb.h"
-#include "../opcodes/inc.h"
+#include "../opcodes/sub.h"
+#include "../opcodes/xor.h"
 
 struct instruction {
   char *opcode;

@@ -130,7 +130,6 @@ struct instruction add03(unsigned char byte) {
   return ins;
 }
 
-
 struct instruction add04(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
@@ -150,7 +149,6 @@ struct instruction add04(unsigned char byte) {
   return ins;
 }
 
-
 struct instruction add05(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
@@ -169,7 +167,6 @@ struct instruction add05(unsigned char byte) {
   ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction add80(unsigned char byte) {
   struct instruction ins;
@@ -292,4 +289,3 @@ struct instruction add83(unsigned char byte) {
   ins.has_two = 1;
   return ins;
 }
- 
