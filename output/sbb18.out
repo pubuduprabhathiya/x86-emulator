@@ -1,3 +1,3 @@
 18 c1
 
-sbb %AL, %CL
+sbb %AL, %AL
