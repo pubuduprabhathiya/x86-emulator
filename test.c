@@ -30,14 +30,7 @@ void execute_test(char *name) {
   printf("==============================start test %s ==============================\n\n", name);
   // name=strcatn(2, BUFSIZ, "../sample/", name);
   FILE *ptr;
-<<<<<<< HEAD
-  ptr =
-      fopen(strcatn(2, BUFSIZ,
-                    "../sample/", name),
-            "r");
-=======
   ptr = fopen(strcatn(2, BUFSIZ, "../sample/", name), "r");
->>>>>>> add-opcode
 
   if (NULL == ptr) {
     printf("file can't be opened \n");
