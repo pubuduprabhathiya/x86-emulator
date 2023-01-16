@@ -135,7 +135,7 @@ ins.has_two=1;
 struct instruction mov88(unsigned char byte) {
 
   struct instruction ins;
-  struct input_data input = {1, 1, 1, reg_8, reg_8};
+  struct input_data input = {1, 0, 1, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "mov";
   ins.operands = &op;
@@ -200,7 +200,7 @@ ins.has_two=1;
 
 struct instruction mov8a(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = {1, 1, 1, reg_8, reg_8};
+  struct input_data input = {1, 1, 0, reg_8, reg_8};
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "mov";
   ins.operands = &op;
@@ -230,7 +230,7 @@ ins.has_two=1;
 
 struct instruction mov8b(unsigned char byte) {
   struct instruction ins;
-  struct input_data input = {1, 1, 1, reg_32, reg_32};
+  struct input_data input = {1, 1, 0, reg_32, reg_32};
 
   struct modrm_output op = decode_modrm(input);
   ins.opcode = "mov";
