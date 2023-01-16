@@ -28,8 +28,7 @@ struct instruction add00(unsigned char byte) {
 
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
-
-    uint8_t arg = (uint8_t)((uint8_t)data->value + *reg2->value);
+    uint8_t arg = (uint8_t)((uint8_t)*data->value + *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -61,7 +60,7 @@ struct instruction add01(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.second_reg_type, op.second_operand_register);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
+    u_int32_t arg = (u_int32_t)((u_int32_t)*data->value + *reg2->value);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -93,7 +92,7 @@ struct instruction add02(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.first_reg_type, op.first_operand_register);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + *reg2->value);
+    u_int32_t arg = (u_int32_t)((u_int32_t)*data->value + *reg2->value);
     *(reg2->value) = arg;
   }
   ins.has_two = 1;
@@ -124,13 +123,12 @@ struct instruction add03(unsigned char byte) {
     Register_32 *reg2 =
         get_register(op.first_reg_type, op.first_operand_register);
 
-    u_int32_t arg = (u_int32_t)(data->value + *reg2->value);
+    u_int32_t arg = (u_int32_t)(*data->value + *reg2->value);
     *(reg2->value) = arg;
   }
   ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction add04(unsigned char byte) {
   struct instruction ins;
@@ -151,7 +149,6 @@ struct instruction add04(unsigned char byte) {
   return ins;
 }
 
-
 struct instruction add05(unsigned char byte) {
   struct instruction ins;
   struct modrm_output op;
@@ -170,7 +167,6 @@ struct instruction add05(unsigned char byte) {
   ins.has_two = 1;
   return ins;
 }
-
 
 struct instruction add80(unsigned char byte) {
   struct instruction ins;
@@ -193,7 +189,7 @@ struct instruction add80(unsigned char byte) {
     get_mem()->read(&op.first_operand_effective_addr, data);
 
     u_int8_t arg =
-        (u_int8_t)((u_int8_t)data->value + (u_int8_t)dis_out->address);
+        (u_int8_t)((u_int8_t)*data->value + (u_int8_t)dis_out->address);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -223,7 +219,7 @@ struct instruction add81(unsigned char byte) {
     data->value = malloc(sizeof(u_int32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + dis_out->address);
+    u_int32_t arg = (u_int32_t)((u_int32_t)*data->value + dis_out->address);
     data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -254,7 +250,7 @@ struct instruction add82(unsigned char byte) {
     get_mem()->read(&op.first_operand_effective_addr, data);
 
     u_int8_t arg =
-        (u_int8_t)((u_int8_t)data->value + (u_int8_t)dis_out->address);
+        (u_int8_t)((u_int8_t)*data->value + (u_int8_t)dis_out->address);
     data->type = UINT8;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -285,7 +281,7 @@ struct instruction add83(unsigned char byte) {
     data->value = malloc(sizeof(u_int32_t));
     get_mem()->read(&op.first_operand_effective_addr, data);
 
-    u_int32_t arg = (u_int32_t)((u_int32_t)data->value + dis_out->address);
+    u_int32_t arg = (u_int32_t)((u_int32_t)*data->value + dis_out->address);
     data->type = UINT32;
     data->value = &arg;
     get_mem()->write(&op.first_operand_effective_addr, data);
@@ -293,4 +289,3 @@ struct instruction add83(unsigned char byte) {
   ins.has_two = 1;
   return ins;
 }
- 

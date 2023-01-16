@@ -1,6 +1,7 @@
-00 04 05 34 23 43 34 4e ff c4 81 c2 97 1b 00 00
+88 05 01 00 00 00 88 0d 02 00 00 00 00 c1 88 0d 03 00 00 00 8a 15 03 00 00 00
 
-add %AL, (0X34432334(%EAX))
-dec %ESI
-inc %ESP
-add $0X1B97, %EDX
+mov %AL, $0X1
+mov %CL, $0X2
+add %AL, %CL
+mov %CL, $0X3
+mov $0X3, %DL

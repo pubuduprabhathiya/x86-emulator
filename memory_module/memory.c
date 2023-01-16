@@ -60,12 +60,12 @@ int cell_index(uint32_t *address) {
       return i;
     }
   }
-  mem->extend_hashtable(mem);
+  mem->extend_hashtable(address);
 
   return mem->hashtablesize - 1;
 }
 
-void extend_hashtable() {
+void extend_hashtable(uint32_t *address) {
   int hashtablesize = mem->hashtablesize;
 
   uint32_t *new_hashtable =
@@ -87,6 +87,7 @@ void extend_hashtable() {
   mem->hashtable = new_hashtable;
   mem->hashtablesize += 1;
   mem->values = new_values;
+  mem->hashtable[mem->hashtablesize - 1] = *address;
 }
 
 void dump() {

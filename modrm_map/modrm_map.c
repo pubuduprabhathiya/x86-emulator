@@ -67,7 +67,6 @@ void get_rm(int mod, int rm, enum reg_type type, char **registertype,
   }
 }
 
-
 struct modrm_output decode_modrm(struct input_data input) {
   unsigned char byte = get_next_byte();
   int mod = byte >> 6;
