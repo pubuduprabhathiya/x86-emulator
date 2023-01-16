@@ -1,9 +1,9 @@
+#include "aux.h"
+#include <assert.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "aux.h"
-#include <assert.h>
 
 char *strcatn(unsigned nstr, unsigned max_len, ...) {
   unsigned n = 0, max = 64;
@@ -71,7 +71,6 @@ void write_file(char *name, char *result) {
   name = strcatn(3, BUFSIZ, "../output/", name, ".out");
 
   fp = fopen(name, "w");
-  // fprintf(fp, result);
   fputs(result, fp);
   fclose(fp);
 }

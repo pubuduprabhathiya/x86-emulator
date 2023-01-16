@@ -48,26 +48,28 @@ map *opcode_map(int byte) {
 char *decode(unsigned char byte) {
   int first = byte / 16;
   int second = byte % 16;
-  map *fun= opcode_map(first);
-  if(fun==NULL){
+  map *fun = opcode_map(first);
+  if (fun == NULL) {
     printf("Currently not support\n");
     return NULL;
   }
-  if(fun[second]==NULL){
+  if (fun[second] == NULL) {
     printf("Currently not support\n");
     return NULL;
   }
-  struct instruction ins =fun[second](byte);
+  struct instruction ins = fun[second](byte);
   char *result;
-  if(ins.has_two){
-   result=strcatn(6, BUFSIZ, ins.opcode, " ", ins.operands->second_string_opeands,
-              ", ", ins.operands->first_string_opeands, "\n");
-  }else{
-    result=strcatn(5, BUFSIZ, ins.opcode, " ", ins.operands->second_string_opeands,ins.operands->first_string_opeands, "\n");
+  if (ins.has_two) {
+    result =
+        strcatn(6, BUFSIZ, ins.opcode, " ", ins.operands->second_string_opeands,
+                ", ", ins.operands->first_string_opeands, "\n");
+  } else {
+    result =
+        strcatn(5, BUFSIZ, ins.opcode, " ", ins.operands->second_string_opeands,
+                ins.operands->first_string_opeands, "\n");
   }
   printf("%s", result);
   return result;
- 
 }
 
 char *print_ins(struct instruction *ins) {
